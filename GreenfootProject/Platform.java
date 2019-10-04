@@ -7,7 +7,7 @@ public class Platform extends Blocks
     Platform(int ID) {
         super(ID);
         BufferedImage bufImage = getImage().getAwtImage(); //Whatever
-        bufImage = bufImage.getSubimage(0,0,64,32);
+        bufImage = bufImage.getSubimage(0,0,getImage().getWidth(),getImage().getHeight()/2);
         
         GreenfootImage gImage = new GreenfootImage(bufImage.getWidth(), bufImage.getHeight());
         BufferedImage gBufImg = gImage.getAwtImage();
