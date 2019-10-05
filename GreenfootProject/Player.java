@@ -20,6 +20,7 @@ public class Player extends Mover
          * Sets the size to current size devided by scalingFactor in Options class
          * Sets the image to the new resized image*/ 
         GreenfootImage image = getImage();
+        
         image.scale((image.getWidth() / Options.scalingFactor),(image.getHeight() / Options.scalingFactor));
         setImage(image);
         imageStart = image;
@@ -46,7 +47,8 @@ public class Player extends Mover
         doGravity();
         if (!started) {
             if (intro == 0) { 
-                setLocation(0, Globals.worldHeight - (Globals.startingHeight * Options.heightSize));
+                setLocation(-32, getY());
+                System.out.println(getY());
             }
             if (intro % 15 == 0) {
                 if (getImage() == image1) {
@@ -55,9 +57,10 @@ public class Player extends Mover
                     setImage(image1);
                 }
             }
-            if (intro >= 150) {
+            if (intro >= 200) {
                 setImage(imageStart);
                 started = true;
+                System.out.println(getY());
             } else {
                 setLocation(getX() + 1, getY());
             }
