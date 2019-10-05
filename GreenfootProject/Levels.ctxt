@@ -1,11 +1,9 @@
 #BlueJ class context
 comment0.target=Levels
-comment1.params=level
-comment1.target=void\ getWorldMap(java.lang.String)
+comment1.params=arr\ toCheckValue
+comment1.target=boolean\ check(java.lang.Integer[],\ int)
 comment2.params=
-comment2.target=void\ renderWorld()
-comment3.params=arr\ toCheckValue
-comment3.target=boolean\ check(java.lang.Integer[],\ int)
-comment4.params=
-comment4.target=Levels()
-numComments=5
+comment2.target=Levels()
+comment3.params=x\ y\ cellsize\ idk
+comment3.target=Levels(int,\ int,\ int,\ boolean)
+numComments=4
