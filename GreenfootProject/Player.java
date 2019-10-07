@@ -14,6 +14,7 @@ public class Player extends Mover
     private GreenfootImage image2 = new GreenfootImage ("alienGreen_walk2.png");
     private int sinceLastAnimation;
     boolean started;
+    boolean dead = false;
     int intro;
     Player() {
         /* Gets the image
@@ -35,6 +36,7 @@ public class Player extends Mover
         setPlatformClasses(new Class[]{Platform.class});
         setSlopeLeftClasses(new Class[]{SlopeLeft.class});
         setSlopeRightClasses(new Class[]{SlopeRight.class});
+        setDyingClasses(new Class[]{HalfSaw.class});
         
         started = false;
         
@@ -64,7 +66,7 @@ public class Player extends Mover
                 setLocation(getX() + 1, getY());
             }
             intro += 1;
-        } else {
+        } else if (!dead) {
             if(Greenfoot.isKeyDown(Options.leftButtonPlayer1))
             {
                 moveLeft();
@@ -83,8 +85,12 @@ public class Player extends Mover
                 } 
             }
             if (atBottom()) {
+                dead = true;
+            } else {
+            dead = died(); //set dead state to the died check. so true or false
             }
-            //System.out.println("Camera: " + Camera.x + ", " + Camera.y + " Player: " + getX() + ", " + getY());
+        } else {
+            System.out.println("Play death animation btw");
         }
     } 
 }

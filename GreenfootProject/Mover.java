@@ -15,7 +15,22 @@ public class Mover extends Actor
     private Class[] platform = new Class[0];
     private Class[] slopeLeft = new Class[0];
     private Class[] slopeRight = new Class[0];
+    private Class[] dyingClass = new Class[0];
     private int vSpeed = 0;                         // current vertical speed
+    
+    public boolean died () {
+        for (Class c: dyingClass) {
+            if (getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 - 1, c) != null //bottom right
+                || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/-2 + 1, c) != null //top right
+                || getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/-2 + 1, c) != null //top left
+                || getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 - 1, c) != null) //bottom left
+                {
+                System.out.println("Dieded");
+                return true;
+                }
+        }
+        return false;
+    }
     
     public void moveRight() { //moving right method
         if (canMoveRight()) //check if we can move right, check method below
@@ -34,7 +49,7 @@ public class Mover extends Actor
         for(Class c: slopeRight) {
             if (getOneObjectAtOffset(getImage().getWidth()/2 - speed, getImage().getHeight()/2, c) != null //get object at bottom left of object
                 || getOneObjectAtOffset(getImage().getWidth()/2 - speed, getImage().getHeight()/-2, c) != null) { //get object at top left of object
-                setLocation(getX() + speed, getY() - speed - 1); //if either is has an object there thats part of the barriers it will set canMoveLeft to false
+                setLocation(getX() + speed, getY() - speed - 2); //if either is has an object there thats part of the barriers it will set canMoveLeft to false
                 return false;
             }
         }
@@ -43,7 +58,6 @@ public class Mover extends Actor
         }
         return true; //return true if code hasn't returned anything yet
     }
-    
     public void moveLeft() { //moving left method
         if (canMoveLeft()) //check if we can move left, check method below
             setLocation(getX() - speed,getY()); //move left
@@ -61,7 +75,7 @@ public class Mover extends Actor
         for(Class c: slopeLeft) {
             if (getOneObjectAtOffset(getImage().getWidth()/-2 - speed, getImage().getHeight()/2, c) != null //get object at bottom left of object
                 || getOneObjectAtOffset(getImage().getWidth()/-2 - speed, getImage().getHeight()/-2, c) != null) { //get object at top left of object
-                setLocation(getX() - speed, getY() - speed - 1); //if either is has an object there thats part of the barriers it will set canMoveLeft to false
+                setLocation(getX() - speed, getY() - speed - 2); //if either is has an object there thats part of the barriers it will set canMoveLeft to false
                 return false;
             }
         }
@@ -85,7 +99,6 @@ public class Mover extends Actor
                 b = false; //if either has an object there thats part of the barriers it will set canMoveUpwards to false
             }
         }
-        
         return b; //return true or false
     }
     
@@ -118,7 +131,7 @@ public class Mover extends Actor
     public boolean onSlopeLeft() {
         boolean onSlopeLeft = false;
         for (Class c: slopeLeft) { //check for slope blocks 
-            Actor slopeLeftBelow = (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + vSpeed, c));
+            Actor slopeLeftBelow = (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + vSpeed - 1, c));
             if (slopeLeftBelow != null) {
                 int toTheRight = ((getX() + getImage().getWidth()/-2) - slopeLeftBelow.getX()); 
                 int slopePixelY = slopeLeftBelow.getY() + toTheRight;
@@ -133,14 +146,14 @@ public class Mover extends Actor
     public boolean onSlopeRight() {
         boolean onSlopeRight = false;
         for (Class c: slopeRight) {
-            Actor slopeRightBelow = (getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 + vSpeed, c));
+            Actor slopeRightBelow = (getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 + vSpeed - 1, c));
             if (slopeRightBelow != null) {
                 int toTheLeft = ((getX() + getImage().getWidth()/2) - (slopeRightBelow.getX() + slopeRightBelow.getImage().getWidth()/2));
                 int slopePixelY = slopeRightBelow.getY() + slopeRightBelow.getImage().getHeight()/2 - (Options.widthSize + toTheLeft);
                 while (getY() + getImage().getHeight()/2 > slopePixelY) { //anti clip
                     setLocation(getX(), getY() - 1);
                 }
-                onSlopeRight = ((getY() + getImage().getHeight()/2) == slopePixelY);
+                onSlopeRight = ((getY() + getImage().getHeight()/2) >= slopePixelY);
             }
         }
         return onSlopeRight;
@@ -152,11 +165,10 @@ public class Mover extends Actor
     public void doGravity() //gravity method
     {
         if(vSpeed != 0 && onGround()) {vSpeed = 0;} //if object is on the ground vertical speed is 0
-        else if (vSpeed != 0 && onSlopeLeft()) {vSpeed = 0;} //if object is on a slope. vertical speed is 0
-        else if (vSpeed != 0 && onSlopeRight()) {vSpeed = 0;} //if object is on a slope. vertical speed is 0
-        else if(vSpeed < 0 && (!canMoveUpwards()))  {vSpeed = 1;} //if object is moving up and hit a block set vertical speed to going down at speed 1
+        else if (vSpeed != 0 && onSlope()) {vSpeed = 0;} //if object is on a slope. vertical speed is 0
+        else if(vSpeed < 0 && (!canMoveUpwards()))  {vSpeed = 0;} //if object is moving up and hit a block vertical speed is 0
         setLocation(getX(), getY() + vSpeed); //set object location to new Y location
-        vSpeed = vSpeed + acceleration; //up the object by the acceleration
+        vSpeed = vSpeed + acceleration; //up the object's vertical speed by the acceleration
         
     }
     protected boolean atBottom() //check if player is on the bottom of the screen
@@ -182,6 +194,9 @@ public class Mover extends Actor
     protected void setSlopeRightClasses(Class[] c)
     {
         slopeRight = c;
+    }
+    protected void setDyingClasses(Class[] c) {
+        dyingClass = c;
     }
     protected void setGravity(int g) //set the object's acceleration (pixels/s to slow down by vertically
     {

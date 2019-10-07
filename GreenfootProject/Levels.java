@@ -101,6 +101,8 @@ public class Levels extends World
                     nextBlock = new SlopeLeft(world[i] - 1);
                 } else if (check(Globals.slopeRights, world[i] - 1)) {
                     nextBlock = new SlopeRight(world[i] - 1);
+                } else if (world[i] - 1 == 38 || world[i] - 1 == 39 || world[i] - 1 == 40) {
+                    nextBlock = new HalfSaw();
                 } else if (world[i] != 0){
                     nextBlock = new Solid(world[i] - 1); 
                 } else {
