@@ -33,6 +33,8 @@ public class Player extends Mover
         //set what classes the player can't move through
         setBlockingClasses(new Class[]{Solid.class});
         setPlatformClasses(new Class[]{Platform.class});
+        setSlopeLeftClasses(new Class[]{SlopeLeft.class});
+        setSlopeRightClasses(new Class[]{SlopeRight.class});
         
         started = false;
         
