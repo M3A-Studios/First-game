@@ -1,14 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class SlopeLeft here.
+ * Write a description of class SlopeRight here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class SlopeLeft extends Blocks
+public class SlopeRight extends Blocks
 {
-    SlopeLeft (int ID) {
+    SlopeRight (int ID) {
         super(ID);
     }
 }
