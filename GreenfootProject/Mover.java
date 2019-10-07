@@ -86,7 +86,6 @@ public class Mover extends Actor
                 Actor platformBelow = (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + vSpeed, c));
                 if (platformBelow != null) {
                     insidePlatform = ((platformBelow.getY() - Options.heightSize) < getY());
-                    System.out.println(insidePlatform);
                 }
                 if (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + vSpeed, c) != null //get object at lower left pixel of object
                     || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 + vSpeed, c) != null) { //get object at lower right pixel of object

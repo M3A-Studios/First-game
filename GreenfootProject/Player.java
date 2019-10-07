@@ -48,7 +48,6 @@ public class Player extends Mover
         if (!started) {
             if (intro == 0) { 
                 setLocation(-32, getY());
-                System.out.println(getY());
             }
             if (intro % 15 == 0) {
                 if (getImage() == image1) {
@@ -60,7 +59,6 @@ public class Player extends Mover
             if (intro >= 200) {
                 setImage(imageStart);
                 started = true;
-                System.out.println(getY());
             } else {
                 setLocation(getX() + 1, getY());
             }

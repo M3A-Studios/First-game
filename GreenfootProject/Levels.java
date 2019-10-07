@@ -65,7 +65,7 @@ public class Levels extends World
         //reset starting point for map creation
         width = -1;
         height = 0;
-        System.out.println("\nLevelWidth: " + levelWidth + ", LevelHeight " + levelHeight + ",\nTotal needed entries " + (levelWidth * levelHeight) + ", Total gotten entries: " + world.length + "\n");
+        //System.out.println("\nLevelWidth: " + levelWidth + ", LevelHeight " + levelHeight + ",\nTotal needed entries " + (levelWidth * levelHeight) + ", Total gotten entries: " + world.length + "\n");
         for (int i = 0; i < world.length; i++) {
             width += 1;
             //after width reaches levelWidth it goes to 0 and adds 1 to height. goes to next line
@@ -131,7 +131,6 @@ public class Levels extends World
         scrollActor = new Player(); //Creates the object to focus on
         addObject(scrollActor, 0, 0);
         scroll();
-        System.out.println(x + ", " + y);
         scrollActor.setLocation(x, y); //move scrollactor to the right spot
         scroll();
     }
