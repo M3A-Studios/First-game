@@ -82,9 +82,17 @@ public class Mover extends Actor
         }
         for (Class c: platform) {
             if (vSpeed >= 0) {
+                boolean insidePlatform = false;
+                Actor platformBelow = (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + vSpeed, c));
+                if (platformBelow != null) {
+                    insidePlatform = ((platformBelow.getY() - Options.heightSize) < getY());
+                    System.out.println(insidePlatform);
+                }
                 if (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + vSpeed, c) != null //get object at lower left pixel of object
                     || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 + vSpeed, c) != null) { //get object at lower right pixel of object
+                    if (!insidePlatform) {
                     b = true; //if either has an object there thats part of the barriers it will set on ground to true
+                    }
                 }
             }
         }

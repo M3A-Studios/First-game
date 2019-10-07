@@ -91,20 +91,29 @@ public class Levels extends World
              *adds new block at the next cords.
              *
              */
-            if (check(Globals.platforms, world[i] - 1)) {
-                Platform nextBlock = new Platform(world[i] - 1);
-                addObject(nextBlock,width*Options.widthSize + Options.widthSize/2,
-                height*Options.heightSize);
-            } else if (check(Globals.nonSolids, world[i] - 1)) {
-                NonSolid nextBlock = new NonSolid(world[i] - 1);
-                addObject(nextBlock,width*Options.widthSize + Options.widthSize/2,
-                height*Options.heightSize + Options.heightSize/2);
-            } else if (world[i] != 0) {
-                Solid nextBlock = new Solid(world[i] - 1);
-                addObject(nextBlock,width*Options.widthSize + Options.widthSize/2,
-                height*Options.heightSize + Options.heightSize/2);
-            } 
+            placeBlock: {
+                Actor nextBlock;
+                if (check(Globals.platforms, world[i] - 1)) {
+                    nextBlock = new Platform(world[i] - 1);
+                } else if (check(Globals.nonSolids, world[i] - 1)) {
+                    nextBlock = new NonSolid(world[i] - 1);
+                } else if (check(Globals.slopeLefts, world[i] - 1)) {
+                    nextBlock = new SlopeLeft(world[i] - 1);
+                } else if (check(Globals.slopeRights, world[i] - 1)) {
+                    nextBlock = new SlopeRight(world[i] - 1);
+                } else if (world[i] != 0){
+                    nextBlock = new Solid(world[i] - 1); 
+                } else {
+                    break placeBlock;
+                }
+                //finally add the block if not broken out of
+                Add(nextBlock); 
+            }
         } 
+    }
+    public void Add(Actor nextBlock) {
+        addObject(nextBlock, width*Options.widthSize + Options.widthSize/2,
+                height*Options.heightSize + Options.heightSize/2);
     }
     public static boolean check(Integer[] arr, int toCheckValue) {
         boolean test
