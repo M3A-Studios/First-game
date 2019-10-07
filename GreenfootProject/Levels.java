@@ -95,13 +95,13 @@ public class Levels extends World
             } else if (check(Globals.nonSolids, world[i] - 1)) {
                 NonSolid nextBlock = new NonSolid(world[i] - 1);
                 addObject(nextBlock,width*Options.widthSize + Options.widthSize/2,
-            height*Options.heightSize + Options.heightSize/2);
-            } else if (world[i] != 0) { //if the block isn't ground
+                height*Options.heightSize + Options.heightSize/2);
+            } else if (world[i] != 0) {
                 Solid nextBlock = new Solid(world[i] - 1);
                 addObject(nextBlock,width*Options.widthSize + Options.widthSize/2,
-            height*Options.heightSize + Options.heightSize/2);
-            }
-        }
+                height*Options.heightSize + Options.heightSize/2);
+            } 
+        } 
     }
     public static boolean check(Integer[] arr, int toCheckValue) {
         boolean test
@@ -112,4 +112,20 @@ public class Levels extends World
     public Levels() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
     }
-}
+    public void initiateScroll() {
+    }
+    public void scroll(Actor scrollActor, Scroller scroller) {
+        int loX = Options.screenWidth/16*7; //Barrier left of center to move
+        int hiX = Options.screenWidth-(Options.screenWidth/16*7); //Barrier right of center to move
+        int loY = Options.screenHeight/8*2; //Barrier from the ceiling to move
+        int hiY = Options.screenHeight-(Options.screenHeight/8*3); //Barrier from the bottom to move
+        // determine offsets and scroll
+        int dsx = 0, dsy = 0;
+        if (scrollActor.getX() < loX) dsx = scrollActor.getX()-loX;
+        if (scrollActor.getX() > hiX) dsx = scrollActor.getX()-hiX;
+        if (scrollActor.getY() < loY) dsy = scrollActor.getY()-loY;
+        if (scrollActor.getY() > hiY) dsy = scrollActor.getY()-hiY;
+        scroller.scroll(dsx, dsy); //do the scrolling
+        Globals.currentX = scroller.getScrolledX(); //return how much the screen has scrolled for future usage
+    }
+} 
