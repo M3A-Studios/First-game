@@ -31,13 +31,13 @@ public class Mover extends Actor
                 return false; //if either is has an object there thats part of the barriers it will set canMoveRight to false
             } 
         }
-        //for(Class c: slopeRight) {
-        //    if (getOneObjectAtOffset(getImage().getWidth()/2 - speed, getImage().getHeight()/2, c) != null //get object at bottom left of object
-          //      || getOneObjectAtOffset(getImage().getWidth()/2 - speed, getImage().getHeight()/-2, c) != null) { //get object at top left of object
-          //      setLocation(getX() + speed, getY() - speed - 1); //if either is has an object there thats part of the barriers it will set canMoveLeft to false
-          //      return false;
-          //  }
-        //}
+        for(Class c: slopeRight) {
+            if (getOneObjectAtOffset(getImage().getWidth()/2 - speed, getImage().getHeight()/2, c) != null //get object at bottom left of object
+                || getOneObjectAtOffset(getImage().getWidth()/2 - speed, getImage().getHeight()/-2, c) != null) { //get object at top left of object
+                setLocation(getX() + speed, getY() - speed - 1); //if either is has an object there thats part of the barriers it will set canMoveLeft to false
+                return false;
+            }
+        }
         if ((getX() + getImage().getWidth()*3/2 + Globals.currentX + speed) > Globals.worldWidth) { //check if you reached end of the world
             return false; //if so return false
         }
@@ -122,7 +122,9 @@ public class Mover extends Actor
             if (slopeLeftBelow != null) {
                 int toTheRight = ((getX() + getImage().getWidth()/-2) - slopeLeftBelow.getX()); 
                 int slopePixelY = slopeLeftBelow.getY() + toTheRight;
-                //System.out.println("Slope pixel: " + (getX() + getImage().getWidth()/-2) + ", " + slopePixelY + ", Player lower left: " + (getX() + getImage().getWidth()/-2) + ", " + (getY() + getImage().getHeight()/2));
+                while (getY() + getImage().getHeight()/2 > slopePixelY) { //anti clip
+                    setLocation(getX(), getY() - 1);
+                }
                 onSlopeLeft = ((getY() + getImage().getHeight()/2) >= slopePixelY);
             }
         }
@@ -133,16 +135,19 @@ public class Mover extends Actor
         for (Class c: slopeRight) {
             Actor slopeRightBelow = (getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 + vSpeed, c));
             if (slopeRightBelow != null) {
-                System.out.println(getX() + getImage().getWidth()/2);
-                System.out.println(slopeRightBelow.getX() + slopeRightBelow.getImage().getWidth()/2);
                 int toTheLeft = ((getX() + getImage().getWidth()/2) - (slopeRightBelow.getX() + slopeRightBelow.getImage().getWidth()/2));
-                System.out.println(toTheLeft);
-                int slopePixelY = slopeRightBelow.getY() + toTheLeft;
-                System.out.println("Slope Y: " + slopePixelY + ", Player lower right Y: " + (getY() + getImage().getHeight()/2));
-                onSlopeRight = ((getY() + getImage().getHeight()/2) >= slopePixelY);
+                int slopePixelY = slopeRightBelow.getY() + slopeRightBelow.getImage().getHeight()/2 - (Options.widthSize + toTheLeft);
+                while (getY() + getImage().getHeight()/2 > slopePixelY) { //anti clip
+                    setLocation(getX(), getY() - 1);
+                }
+                onSlopeRight = ((getY() + getImage().getHeight()/2) == slopePixelY);
             }
         }
         return onSlopeRight;
+    }
+    public boolean onSlope() {
+        if (onSlopeRight() || onSlopeLeft()) { return true; }
+        return false;
     }
     public void doGravity() //gravity method
     {

@@ -45,7 +45,6 @@ public class Player extends Mover
     }
     public void act() 
     {
-        // Allows for jumping & falling
         doGravity();
         if (!started) {
             if (intro == 0) { 
@@ -74,9 +73,14 @@ public class Player extends Mover
             {
                 moveRight();
             }
-            if(Greenfoot.isKeyDown(Options.jumpButtonPlayer1) && onGround() ||  Greenfoot.isKeyDown(Options.jumpButton2Player1) && onGround()) // Only jump if on ground
+            if(Greenfoot.isKeyDown(Options.jumpButtonPlayer1) ||  Greenfoot.isKeyDown(Options.jumpButton2Player1)) // Only jump if on ground
             {
-                jump(20); // jump()'s parameter should be rather large
+                if (onSlope()) {
+                    setLocation(getX(), getY() - 1);
+                    jump(20); // jump()'s parameter should be rather large
+                } else if (onGround()) {
+                    jump(20);
+                } 
             }
             if (atBottom()) {
             }

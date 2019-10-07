@@ -1,6 +1,6 @@
 #Greenfoot project file
 class.NonSolid.image=Air.png
-class.Player.image=120.png
+class.Player.image=alienGreen_front.png
 class.Tutorial.image=backgroundColorGrass.png
 dependency1.from=Levels
 dependency1.to=Scroller
