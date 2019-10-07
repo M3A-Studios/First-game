@@ -15,6 +15,9 @@ public class Levels extends World
     protected static int width; //level rendering tiles per row
     protected static int height; //level rendering rows
     
+    Scroller scroller; // the object that performs the scrolling
+    Actor scrollActor; // an actor to stay in view*
+    
     protected static void getWorldMap (String level) {
         //reset the level layout to blank
         levelWidth = 0;
@@ -112,9 +115,18 @@ public class Levels extends World
     public Levels() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
     }
-    public void initiateScroll() {
+    public void initiateScroll(String backgroundImage, int x, int y) {
+        GreenfootImage bg = new GreenfootImage(backgroundImage); // creates an image to scroll (adjust as needed)
+        
+        scroller = new Scroller(this, bg, Globals.worldWidth, Globals.worldHeight); // creates the Scroller object for this world, with background bg of image width and height in Globals.
+        scrollActor = new Player(); //Creates the object to focus on
+        addObject(scrollActor, 0, 0);
+        scroll();
+        System.out.println(x + ", " + y);
+        scrollActor.setLocation(x, y); //move scrollactor to the right spot
+        scroll();
     }
-    public void scroll(Actor scrollActor, Scroller scroller) {
+    public void scroll() {
         int loX = Options.screenWidth/16*7; //Barrier left of center to move
         int hiX = Options.screenWidth-(Options.screenWidth/16*7); //Barrier right of center to move
         int loY = Options.screenHeight/8*2; //Barrier from the ceiling to move
