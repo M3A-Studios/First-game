@@ -146,12 +146,12 @@ public class Scroller
             }
         }
         // adjust position of all actors (that can move with 'setLocation')
+        Globals.entityOffsetX = -dsx;
+        Globals.entityOffsetY = -dsy;
         for (Object obj : world.getObjects(null))
         {
             Actor actor = (Actor) obj;
             String actorString = "" + actor.getClass().getName();
-            Globals.entityOffsetX = -dsx;
-            Globals.entityOffsetY = -dsy;
             if (!actorString.contains("Player")) {
                 actor.setLocation(actor.getX()-dsx, actor.getY()-dsy);
             }

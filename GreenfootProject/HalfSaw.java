@@ -40,7 +40,9 @@ public class HalfSaw extends Mover
             setNewLocation(getX(), getY() + Options.blockSize / 4 - 1);
             this.startingX = this.getX();
             started = true;
-        } 
+        } else {
+            setRelativeLocation(Globals.entityOffsetX,Globals.entityOffsetY);
+        }
         if (currentImage == image1) {
             setImage(image2);
             currentImage = image2;
