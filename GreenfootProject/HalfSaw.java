@@ -32,7 +32,7 @@ public class HalfSaw extends Mover
         
         setImage(image1);
         
-        setBlockingClasses(new Class[]{Solid.class, SlopeLeft.class, SlopeRight.class});
+        setBarrierClasses(new Class[]{Solid.class, SlopeLeft.class, SlopeRight.class});
     }
     public void act() 
     {

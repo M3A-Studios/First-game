@@ -13,7 +13,7 @@ public class Player extends Mover
     private GreenfootImage image1 = new GreenfootImage ("alienGreen_walk1.png");
     private GreenfootImage image2 = new GreenfootImage ("alienGreen_walk2.png");
     
-    boolean started;
+    boolean started = false;
     boolean dead = false;
     private int deathAnimationFrame = 0;
     
@@ -36,16 +36,11 @@ public class Player extends Mover
         setGravity(1); //set gravity of this player
         
         //set what classes act like what for the player
-        setBlockingClasses(new Class[]{Solid.class});
+        setBarrierClasses(new Class[]{Solid.class});
         setPlatformClasses(new Class[]{Platform.class});
         setSlopeLeftClasses(new Class[]{SlopeLeft.class});
         setSlopeRightClasses(new Class[]{SlopeRight.class});
-        setDyingClasses(new Class[]{HalfSaw.class}); //take damage on hit
-        
-        started = false;
-        
-        //String world = getWorld().getClass().getName();
-        //System.out.println(world);
+        setDamagingClasses(new Class[]{HalfSaw.class}); //take damage on hit
     }
     
     public void act() 

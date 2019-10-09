@@ -4,8 +4,8 @@ public class Globals
     public static int worldWidth; //world width
     public static int worldHeight; //world height
     public static int startingHeight;
-    public static boolean alive = true;
     public static String backgroundImage = "background.png"; //backgroud image
+    public static boolean alive = true;
     public static double entityOffsetX = 0;
     public static double entityOffsetY = 0;
     

@@ -3,15 +3,17 @@ import java.util.List;
 
 public class Mover extends Actor
 {
-    private int acceleration = 0;                   // down (gravity)
+    private double acceleration = 0.0;                   // down (gravity)
+    private double vSpeed = 0.0;
+    private double doubleX;
+    private double doubleY;
     private Class[] barrier = new Class[0];
     private Class[] platform = new Class[0];
     private Class[] slopeLeft = new Class[0];
     private Class[] slopeRight = new Class[0];
-    private Class[] dyingClass = new Class[0];
-    private double vSpeed = 0.0;
-    private double doubleX;
-    private double doubleY;
+    private Class[] lava = new Class[0];
+    private Class[] water = new Class[0];
+    private Class[] damaging = new Class[0];
     
     public double getDoubleX() {
         return doubleX;
@@ -30,7 +32,7 @@ public class Mover extends Actor
         setLocation((int) doubleX, (int) doubleY);
     }
     public boolean died () {
-        for (Class c: dyingClass) {
+        for (Class c: damaging) {
             if (getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 - 1, c) != null //bottom right
                 || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/-2 + 1, c) != null //top right
                 || getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/-2 + 1, c) != null //top left
@@ -189,7 +191,7 @@ public class Mover extends Actor
     {
         return getY() >= getWorld().getHeight() - 2; //check if player's Y is 2 or less from the bottom of the screen
     } 
-    protected void setBlockingClasses(Class[] c) //set the blocking classes
+    protected void setBarrierClasses(Class[] c) //set the blocking classes
     {
         barrier = c; //barriers defined in subclass
     }
@@ -205,8 +207,14 @@ public class Mover extends Actor
     {
         slopeRight = c;
     }
-    protected void setDyingClasses(Class[] c) {
-        dyingClass = c;
+    protected void setLavaClasses(Class[] c) {
+        lava = c;
+    }
+    protected void setWaterClasses(Class[] c) {
+        water = c;
+    }
+    protected void setDamagingClasses(Class[] c) {
+        damaging = c;
     }
     protected void setGravity(int g) //set the object's acceleration (pixels/s to slow down by vertically
     {
