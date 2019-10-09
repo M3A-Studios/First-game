@@ -149,7 +149,12 @@ public class Scroller
         for (Object obj : world.getObjects(null))
         {
             Actor actor = (Actor) obj;
-            actor.setLocation(actor.getX()-dsx, actor.getY()-dsy);
+            String actorString = "" + actor.getClass().getName();
+            Globals.entityOffsetX = -dsx;
+            Globals.entityOffsetY = -dsy;
+            if (!actorString.contains("Player")) {
+                actor.setLocation(actor.getX()-dsx, actor.getY()-dsy);
+            }
         }
     }
    

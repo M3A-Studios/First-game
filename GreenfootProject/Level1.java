@@ -1,11 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class Tutorial extends Levels
+public class Level1 extends Levels
 {
     public static int startHeight = 4; //tiles from bottom for animation of player entering the level
     private String backgroundImage = "background.png"; //backgroud image
     
-    public Tutorial() //constructor. basically makes the level when level gets loaded
+    public Level1() //constructor. basically makes the level when level gets loaded
     {    
         super(); //make the world (screen)
         Globals.backgroundImage = backgroundImage;

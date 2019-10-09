@@ -7,19 +7,19 @@ public class HalfSaw extends Mover
     private int movementRange = 4;
     private int startingX;
     private boolean movingRight = true;
-    public int speed = 5;
+    public double speed = 5.0;
     private boolean started;
     private int frames = 0;
     
     private GreenfootImage image1 = new GreenfootImage ("39.png");
     private GreenfootImage image2 = new GreenfootImage ("40.png");
     private GreenfootImage currentImage;
-    private GreenfootImage CutImage(String imageLink) {
+    public GreenfootImage CutImage(String imageLink) {
         GreenfootImage image = new GreenfootImage(imageLink);
-        image.scale((Options.widthSize),(Options.heightSize));
+        image.scale((Options.blockSize),(Options.blockSize));
         
         BufferedImage bufImage = image.getAwtImage();
-        bufImage = bufImage.getSubimage(0,Options.heightSize/2,Options.widthSize,Options.heightSize/2);
+        bufImage = bufImage.getSubimage(0,Options.blockSize/2,Options.blockSize,Options.blockSize/2);
         GreenfootImage gImage = new GreenfootImage(bufImage.getWidth(), bufImage.getHeight());
         BufferedImage gBufImg = gImage.getAwtImage();
         Graphics2D graphics = (Graphics2D)gBufImg.getGraphics();
@@ -32,17 +32,15 @@ public class HalfSaw extends Mover
         
         setImage(image1);
         
-        setMovementSpeed(speed);
         setBlockingClasses(new Class[]{Solid.class, SlopeLeft.class, SlopeRight.class});
     }
     public void act() 
     {
         if (!started) {
-            setLocation(getX(), getY() + Options.heightSize / 4 - 1);
+            setNewLocation(getX(), getY() + Options.blockSize / 4 - 1);
             this.startingX = this.getX();
             started = true;
-        }
-        
+        } 
         if (currentImage == image1) {
             setImage(image2);
             currentImage = image2;
@@ -50,12 +48,12 @@ public class HalfSaw extends Mover
             setImage(image1);
             currentImage = image1;
         }
-        if (movingRight && (getX() + Globals.currentX) < (startingX + speed + movementRange * Options.widthSize) && canMoveRight()) {
-            moveRight();
+        if (movingRight && (getDoubleX() + Globals.currentX) < (startingX + speed + movementRange * Options.blockSize) && canMoveRight(speed)) {
+            moveRight(speed);
         } else {
             movingRight = false;
-            if (canMoveLeft() && (getX() + Globals.currentX - speed) > (startingX - movementRange * Options.widthSize)) {
-                moveLeft();
+            if (canMoveLeft(speed) && (getX() + Globals.currentX - speed) > (startingX - movementRange * Options.blockSize)) {
+                moveLeft(speed);
             } else {
                 movingRight = true;
             }

@@ -57,8 +57,8 @@ public class Levels extends World
             world[i] = Integer.parseInt(integerStrings[i]); //turn array into int array
         }
         
-        Globals.worldHeight = Options.heightSize * levelHeight; //set worldHeight in tiles
-        Globals.worldWidth = Options.widthSize * levelWidth; //set worldWidth in tiles
+        Globals.worldHeight = Options.blockSize * levelHeight; //set worldHeight in tiles
+        Globals.worldWidth = Options.blockSize * levelWidth; //set worldWidth in tiles
         dataReader.close(); //remove the scanner. we don't need it anymore
     }
     protected void renderWorld() {
@@ -114,8 +114,8 @@ public class Levels extends World
         } 
     }
     public void Add(Actor nextBlock) {
-        addObject(nextBlock, width*Options.widthSize + Options.widthSize/2,
-                height*Options.heightSize + Options.heightSize/2);
+        addObject(nextBlock, width*Options.blockSize + Options.blockSize/2,
+                height*Options.blockSize + Options.blockSize/2);
     }
     public static boolean check(Integer[] arr, int toCheckValue) {
         boolean test
@@ -137,17 +137,19 @@ public class Levels extends World
         scroll();
     }
     public void scroll() {
-        int loX = Options.screenWidth/16*7; //Barrier left of center to move
-        int hiX = Options.screenWidth-(Options.screenWidth/16*7); //Barrier right of center to move
-        int loY = Options.screenHeight/8*2; //Barrier from the ceiling to move
-        int hiY = Options.screenHeight-(Options.screenHeight/8*3); //Barrier from the bottom to move
-        // determine offsets and scroll
-        int dsx = 0, dsy = 0;
-        if (scrollActor.getX() < loX) dsx = scrollActor.getX()-loX;
-        if (scrollActor.getX() > hiX) dsx = scrollActor.getX()-hiX;
-        if (scrollActor.getY() < loY) dsy = scrollActor.getY()-loY;
-        if (scrollActor.getY() > hiY) dsy = scrollActor.getY()-hiY;
-        scroller.scroll(dsx, dsy); //do the scrolling
-        Globals.currentX = scroller.getScrolledX(); //return how much the screen has scrolled for future usage
+        if (Globals.alive) {
+            int loX = Options.screenWidth/16*7; //Barrier left of center to move
+            int hiX = Options.screenWidth-(Options.screenWidth/16*7); //Barrier right of center to move
+            int loY = Options.screenHeight/8*2; //Barrier from the ceiling to move
+            int hiY = Options.screenHeight-(Options.screenHeight/8*3); //Barrier from the bottom to move
+            // determine offsets and scroll
+            int dsx = 0, dsy = 0;
+            if (scrollActor.getX() < loX) dsx = scrollActor.getX()-loX;
+            if (scrollActor.getX() > hiX) dsx = scrollActor.getX()-hiX;
+            if (scrollActor.getY() < loY) dsy = scrollActor.getY()-loY;
+            if (scrollActor.getY() > hiY) dsy = scrollActor.getY()-hiY;
+            scroller.scroll(dsx, dsy); //do the scrolling
+            Globals.currentX = scroller.getScrolledX(); //return how much the screen has scrolled for future usage
+        }
     }
 } 
