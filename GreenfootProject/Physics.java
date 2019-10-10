@@ -131,11 +131,11 @@ public class Physics extends Actor
             if (vSpeed >= 0) {
                 boolean insidePlatform = false;
                 boolean insidePlatform2 = false;
-                Actor platformBelow = (getOneObjectAtOffset(getImage().getWidth()/-2, (int) (getImage().getHeight()/2 + vSpeed + Options.smallerScreen), c));
+                Actor platformBelow = (getOneObjectAtOffset(getImage().getWidth()/-2, (int) (getImage().getHeight()/2 + vSpeed - 1 + Options.smallerScreen), c));
                 if (platformBelow != null) {
                     insidePlatform = (platformBelow.getY() - platformBelow.getImage().getHeight()/2 < getY() + getImage().getHeight()/2);
                 }
-                Actor platformBelow2 = (getOneObjectAtOffset(getImage().getWidth()/2, (int) (getImage().getHeight()/2 + vSpeed + Options.smallerScreen), c));
+                Actor platformBelow2 = (getOneObjectAtOffset(getImage().getWidth()/2, (int) (getImage().getHeight()/2 + vSpeed - 1 + Options.smallerScreen), c));
                 if (platformBelow2 != null) {
                     insidePlatform2 = (platformBelow2.getY() - platformBelow2.getImage().getHeight()/2 < getY() + getImage().getHeight()/2);
                 }

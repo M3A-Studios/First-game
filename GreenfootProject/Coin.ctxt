@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=Coin
+comment1.params=ID\ value
+comment1.target=Coin(int,\ int)
+numComments=2
