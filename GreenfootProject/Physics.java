@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
-public class Mover extends Actor
+public class Physics extends Actor
 {
     private double acceleration = 0.0;                   // down (gravity)
     private double vSpeed = 0.0;
@@ -14,6 +14,7 @@ public class Mover extends Actor
     private Class[] lava = new Class[0];
     private Class[] water = new Class[0];
     private Class[] damaging = new Class[0];
+    private Class[] superDamaging = new Class[0];
     
     public double getDoubleX() {
         return doubleX;
@@ -45,6 +46,7 @@ public class Mover extends Actor
     }
     
     public void moveRight(double speed) { //moving right method
+        speed = speed * Options.blockSize / 64;
         if (canMoveRight(speed)) //check if we can move right, check method below
             setRelativeLocation(speed,0); //move right
     }
@@ -71,6 +73,7 @@ public class Mover extends Actor
         return true; //return true if code hasn't returned anything yet
     }
     public void moveLeft(double speed) { //moving left method
+        speed = speed * Options.blockSize / 64;
         if (canMoveLeft(speed)) //check if we can move left, check method below
             setRelativeLocation(-speed,0); //move left
     }
@@ -99,6 +102,7 @@ public class Mover extends Actor
     
     public void jump(double speed) //jump method
     {
+        speed = speed * Options.blockSize / 64;
         if(canMoveUpwards()) //check if we can move upwards
             vSpeed = -speed; //jump at speed speed
     }
@@ -118,21 +122,26 @@ public class Mover extends Actor
         boolean b = false; //by default false
         for(Class c: barrier) //check for barrier blocks (barrier classes can be set in the subclass)
         {
-            if (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + (int) vSpeed, c) != null //get object at lower left pixel of object
-                || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 + (int) vSpeed, c) != null) { //get object at lower right pixel of object
+            if (getOneObjectAtOffset(getImage().getWidth()/-2, (int) (getImage().getHeight()/2 + vSpeed + Options.smallerScreen), c) != null //get object at lower left pixel of object
+                || getOneObjectAtOffset(getImage().getWidth()/2, (int) (getImage().getHeight()/2 + vSpeed + Options.smallerScreen), c) != null) { //get object at lower right pixel of object
                 b = true; //if either has an object there thats part of the barriers it will set on ground to true
             }
         }
         for (Class c: platform) {
             if (vSpeed >= 0) {
                 boolean insidePlatform = false;
-                Actor platformBelow = (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + (int) vSpeed, c));
+                boolean insidePlatform2 = false;
+                Actor platformBelow = (getOneObjectAtOffset(getImage().getWidth()/-2, (int) (getImage().getHeight()/2 + vSpeed + Options.smallerScreen), c));
                 if (platformBelow != null) {
                     insidePlatform = (platformBelow.getY() - platformBelow.getImage().getHeight()/2 < getY() + getImage().getHeight()/2);
                 }
-                if (getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 + (int) vSpeed, c) != null //get object at lower left pixel of object
-                    || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 + (int) vSpeed, c) != null) { //get object at lower right pixel of object
-                    if (!insidePlatform) {
+                Actor platformBelow2 = (getOneObjectAtOffset(getImage().getWidth()/2, (int) (getImage().getHeight()/2 + vSpeed + Options.smallerScreen), c));
+                if (platformBelow2 != null) {
+                    insidePlatform2 = (platformBelow2.getY() - platformBelow2.getImage().getHeight()/2 < getY() + getImage().getHeight()/2);
+                }
+                if (getOneObjectAtOffset(getImage().getWidth()/-2, (int) (getImage().getHeight()/2 + vSpeed + 1), c) != null //get object at lower left pixel of object
+                    || getOneObjectAtOffset(getImage().getWidth()/2, (int) (getImage().getHeight()/2 + vSpeed + 1), c) != null) { //get object at lower right pixel of object
+                    if (!insidePlatform && !insidePlatform2) {
                     b = true; //if either has an object there thats part of the barriers it will set on ground to true
                     }
                 }
@@ -184,7 +193,7 @@ public class Mover extends Actor
         else if (vSpeed != 0 && onSlope()) {vSpeed = 0;} //if object is on a slope. vertical speed is 0
         else if(vSpeed < 0 && (!canMoveUpwards()))  {vSpeed = 0;} //if object is moving up and hit a block vertical speed is 0
         setRelativeLocation(0,vSpeed); //set object location to new Y location
-        vSpeed = vSpeed + acceleration; //up the object's vertical speed by the acceleration
+        vSpeed = vSpeed + (acceleration * Options.blockSize/64); //up the object's vertical speed by the acceleration
         
     }
     protected boolean atBottom() //check if player is on the bottom of the screen

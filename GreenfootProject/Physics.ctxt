@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.target=Mover
+comment0.target=Physics
 comment1.params=
 comment1.target=double\ getDoubleX()
 comment10.params=speed

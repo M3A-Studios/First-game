@@ -11,9 +11,8 @@ public class Options
     public static String leftButton2Player1 = "left";
     public static String downButton2Player1 = "down";
     
-    public static int screenWidth = 1920;
-    public static int screenHeight = screenWidth / 16 * 9;
-    public static int blockSize = 64;
-    
-    public static int scalingFactor = 2;
+    public static int screenHeight = 1080;
+    public static int screenWidth = screenHeight / 9 * 16;
+    public static int blockSize = screenWidth / 30;
+    public static int smallerScreen = 0;
 }

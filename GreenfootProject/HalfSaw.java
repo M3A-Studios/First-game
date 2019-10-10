@@ -2,19 +2,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.awt.image.*;
 import java.awt.*;
 
-public class HalfSaw extends Mover
+public class HalfSaw extends Enemy
 {
-    private int movementRange = 4;
-    private int startingX;
-    private boolean movingRight = true;
-    public double speed = 5.0;
     private boolean started;
-    private int frames = 0;
     
-    private GreenfootImage image1 = new GreenfootImage ("39.png");
-    private GreenfootImage image2 = new GreenfootImage ("40.png");
-    private GreenfootImage currentImage;
-    public GreenfootImage CutImage(String imageLink) {
+    private GreenfootImage cutImage(String imageLink) {
         GreenfootImage image = new GreenfootImage(imageLink);
         image.scale((Options.blockSize),(Options.blockSize));
         
@@ -27,28 +19,34 @@ public class HalfSaw extends Mover
         return(gImage);
     }
     HalfSaw() {
-        image1 = CutImage("39.png");
-        image2 = CutImage("40.png");
+        speed = 5.0;
+        movementRange = 4;
+        movingRight = false;
+        animation1 = cutImage("39.png");
+        animation2 = cutImage("40.png");
+        deathImage = cutImage("38.png");
         
-        setImage(image1);
+        setImage(animation1);
+        currentImage = getImage();
         
         setBarrierClasses(new Class[]{Solid.class, SlopeLeft.class, SlopeRight.class});
-    }
+    } 
     public void act() 
     {
         if (!started) {
             setNewLocation(getX(), getY() + Options.blockSize / 4 - 1);
-            this.startingX = this.getX();
+            startingX = getX();
+            startingY = getX();
             started = true;
         } else {
             setRelativeLocation(Globals.entityOffsetX,Globals.entityOffsetY);
         }
-        if (currentImage == image1) {
-            setImage(image2);
-            currentImage = image2;
+        if (currentImage == animation1) {
+            setImage(animation2);
+            currentImage = animation2;
         } else {
-            setImage(image1);
-            currentImage = image1;
+            setImage(animation1);
+            currentImage = animation1;
         }
         if (movingRight && (getDoubleX() + Globals.currentX) < (startingX + speed + movementRange * Options.blockSize) && canMoveRight(speed)) {
             moveRight(speed);
@@ -60,5 +58,5 @@ public class HalfSaw extends Mover
                 movingRight = true;
             }
         }    
-    } 
+    }  
 }

@@ -125,12 +125,15 @@ public class Levels extends World
     }
     public Levels() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
+        if (Options.screenHeight < 1080) {
+            Options.smallerScreen = 1;// + ((1080-Options.screenHeight)/108);
+        }
     }
     public void initiateScroll(String backgroundImage, int x, int y) {
         GreenfootImage bg = new GreenfootImage(backgroundImage); // creates an image to scroll (adjust as needed)
         
         scroller = new Scroller(this, bg, Globals.worldWidth, Globals.worldHeight); // creates the Scroller object for this world, with background bg of image width and height in Globals.
-        scrollActor = new Player(); //Creates the object to focus on
+        scrollActor = new Player1(); //Creates the object to focus on
         addObject(scrollActor, 0, 0);
         scroll();
         scrollActor.setLocation(x, y); //move scrollactor to the right spot

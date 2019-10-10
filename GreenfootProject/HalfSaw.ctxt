@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.target=HalfSaw
 comment1.params=imageLink
-comment1.target=greenfoot.GreenfootImage\ CutImage(java.lang.String)
+comment1.target=greenfoot.GreenfootImage\ cutImage(java.lang.String)
 comment2.params=
 comment2.target=HalfSaw()
 comment3.params=
