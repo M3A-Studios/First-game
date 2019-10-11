@@ -1,6 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class MenuOptions extends ActorsMenu
+public class MenuOptions extends ActorsOptions
 {
     MenuOptions() {
         GreenfootImage image = new GreenfootImage("Options.png");
@@ -11,7 +11,7 @@ public class MenuOptions extends ActorsMenu
     {
         if (Greenfoot.mouseClicked(this))
         {
-            //call options here
+            optionsMenu();
         }
     }
 }

@@ -128,6 +128,8 @@ public class Levels extends World
         if (Options.screenHeight < 1080) {
             Options.smallerScreen = 1;// + ((1080-Options.screenHeight)/108);
         }
+        ActorsOptions options = new ActorsOptions();
+        addObject(options, 0, 0);
     }
     public void initiateScroll(String backgroundImage, int x, int y) {
         GreenfootImage bg = new GreenfootImage(backgroundImage); // creates an image to scroll (adjust as needed)
