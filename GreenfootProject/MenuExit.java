@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MenuExit extends ActorsMenu
 {
     MenuExit() {
-        GreenfootImage image = getImage();
+        GreenfootImage image = new GreenfootImage("Exit.png");
         image.scale((Options.blockSize) * 4,(Options.blockSize) * 2);
         setImage(image);
     }

@@ -29,8 +29,8 @@ public class Menu extends World
         addObject(uFO4,Options.blockSize * 19, Options.blockSize * 15);
         UFO uFO5 = new UFO("Yellow");
         addObject(uFO5,Options.blockSize * 27, Options.blockSize * 5);
-        MenuStart menuStart = new MenuStart();
-        addObject(menuStart,Options.screenWidth/2,Options.screenHeight - (Options.screenHeight / 10 * 8));
+        MenuPlay menuPlay = new MenuPlay();
+        addObject(menuPlay,Options.screenWidth/2,Options.screenHeight - (Options.screenHeight / 10 * 8));
         MenuContinue menuContinue = new MenuContinue();
         addObject(menuContinue,Options.screenWidth/2,Options.screenHeight - (Options.screenHeight / 10 * 6));
         MenuOptions menuOptions = new MenuOptions();

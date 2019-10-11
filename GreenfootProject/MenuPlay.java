@@ -1,9 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class MenuStart extends ActorsMenu
+public class MenuPlay extends ActorsMenu
 {
-    MenuStart() {
-        GreenfootImage image = getImage();
+    MenuPlay() {
+        GreenfootImage image = new GreenfootImage("Play.png");
         image.scale((Options.blockSize) * 4,(Options.blockSize) * 2);
         setImage(image);
     }
