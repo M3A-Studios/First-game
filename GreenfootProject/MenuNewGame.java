@@ -1,13 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 import java.util.List;
-
-public class MenuContinue extends ActorsMenu
+public class MenuNewGame extends ActorsMenu
 {
-    MenuContinue() {
-        GreenfootImage image = new GreenfootImage("Continue.png");
-        image.scale((Options.blockSize) * 6,(Options.blockSize) * 2);
+    MenuNewGame() {
+        GreenfootImage image = new GreenfootImage("NewGame.png");
+        image.scale((Options.blockSize) * 8,(Options.blockSize) * 2);
         setImage(image);
+        
         normalWidth = image.getWidth();
         normalHeight = image.getHeight();
     }
@@ -15,7 +15,7 @@ public class MenuContinue extends ActorsMenu
     {
         if (Greenfoot.mouseClicked(this))
         {
-            //continue from save file here.
+            Greenfoot.setWorld(new Tutorial());
         }
         MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null) {
@@ -38,5 +38,5 @@ public class MenuContinue extends ActorsMenu
                 getImage().scale(normalWidth, normalHeight);
             }
         }
-    }    
+    }
 }

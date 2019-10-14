@@ -8,7 +8,9 @@ public class ActorsOptions extends Actor
         if(Greenfoot.getKey() == "escape") {
             optionsMenu();
         } 
-    }   
+    }
+    ActorsOptions() {
+    }
     public void optionsMenu() {
         if (!ActorsOptions.optionsOpen) {
             System.out.println("Open Options");
@@ -17,5 +19,5 @@ public class ActorsOptions extends Actor
             System.out.println("Close Options");
             ActorsOptions.optionsOpen = false;
         } 
-    }
+    } 
 }

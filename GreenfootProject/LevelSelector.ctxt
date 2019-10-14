@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=LevelSelector
+comment1.params=
+comment1.target=LevelSelector()
+comment2.params=lvl
+comment2.target=LevelSelector(int)
+comment3.params=backgroundImage\ x\ y
+comment3.target=void\ initiateScroll(java.lang.String,\ int,\ int)
+comment4.params=level
+comment4.target=int\ getMapX(int)
+comment5.params=level
+comment5.target=int\ getMapY(int)
+comment6.params=toScale
+comment6.target=int\ scaledWidth(double)
+comment7.params=toScale
+comment7.target=int\ scaledHeight(double)
+comment8.params=
+comment8.target=void\ scroll()
+numComments=9

@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=LevelNode
+comment1.params=type\ level
+comment1.target=LevelNode(java.lang.String,\ int)
+numComments=2

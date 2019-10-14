@@ -15,6 +15,7 @@ public class Physics extends Actor
     private Class[] water = new Class[0];
     private Class[] damaging = new Class[0];
     private Class[] superDamaging = new Class[0];
+    private Class[] finishFlag = {FinishFlag.class};
     
     public double getDoubleX() {
         return doubleX;
@@ -31,6 +32,16 @@ public class Physics extends Actor
         doubleX = x;
         doubleY = y;
         setLocation((int) doubleX, (int) doubleY);
+    }
+    public boolean finishedLevel() {
+        if (getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 - 1, FinishFlag.class) != null //bottom right
+            || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/-2 + 1, FinishFlag.class) != null //top right
+            || getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/-2 + 1, FinishFlag.class) != null //top left
+            || getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 - 1, FinishFlag.class) != null) //bottom left
+            {
+            return true;
+            }
+        return false;
     }
     public boolean died () {
         for (Class c: damaging) {

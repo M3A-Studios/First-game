@@ -2,8 +2,8 @@
 comment0.target=Player
 comment1.params=image
 comment1.target=greenfoot.GreenfootImage\ cropImage(java.lang.String)
-comment2.params=
-comment2.target=Player()
+comment2.params=color\ player
+comment2.target=Player(java.lang.String,\ int)
 comment3.params=
 comment3.target=void\ act()
 numComments=4

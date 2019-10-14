@@ -1,10 +1,10 @@
 public class Options  
 {
-    public static String jumpButtonPlayer1 = "W";
-    public static String rightButtonPlayer1 = "D";
-    public static String leftButtonPlayer1 = "A";
-    public static String downButtonPlayer1 = "S";
-    public static String actionButtonPlayer1 = "E";
+    public static String jumpButtonPlayer1 = "w";
+    public static String rightButtonPlayer1 = "d";
+    public static String leftButtonPlayer1 = "a";
+    public static String downButtonPlayer1 = "s";
+    public static String actionButtonPlayer1 = "e";
     
     public static String jumpButton2Player1 = "up";
     public static String rightButton2Player1 = "right";

@@ -101,7 +101,9 @@ public class Levels extends World
                     nextBlock = new SlopeLeft(world[i] - 1);
                 } else if (check(Globals.slopeRights, world[i] - 1)) {
                     nextBlock = new SlopeRight(world[i] - 1);
-                } else if (world[i] - 1 == 38 || world[i] - 1 == 39 || world[i] - 1 == 40) {
+                } else if (check(Globals.finishFlag, world[i] - 1)) {
+                    nextBlock = new FinishFlag(world[i] - 1);
+                }else if (world[i] - 1 == 38 || world[i] - 1 == 39 || world[i] - 1 == 40) {
                     nextBlock = new HalfSaw();
                 } else if (world[i] != 0){
                     nextBlock = new Solid(world[i] - 1); 
@@ -126,16 +128,14 @@ public class Levels extends World
     public Levels() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
         if (Options.screenHeight < 1080) {
-            Options.smallerScreen = 1;// + ((1080-Options.screenHeight)/108);
+            Options.smallerScreen = 1;
         }
-        ActorsOptions options = new ActorsOptions();
-        addObject(options, 0, 0);
     }
     public void initiateScroll(String backgroundImage, int x, int y) {
         GreenfootImage bg = new GreenfootImage(backgroundImage); // creates an image to scroll (adjust as needed)
         
         scroller = new Scroller(this, bg, Globals.worldWidth, Globals.worldHeight); // creates the Scroller object for this world, with background bg of image width and height in Globals.
-        scrollActor = new Player1(); //Creates the object to focus on
+        scrollActor = new Player("green", 1); //Creates the object to focus on
         addObject(scrollActor, 0, 0);
         scroll();
         scrollActor.setLocation(x, y); //move scrollactor to the right spot
