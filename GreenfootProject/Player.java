@@ -85,12 +85,13 @@ public class Player extends Physics
             }
             if (endingFrame >= 100) {
                 setImage(imageStand);
-                if (getWorld() instanceof Tutorial) Greenfoot.setWorld(new LevelSelector(0));
-                else if (getWorld() instanceof Level1) Greenfoot.setWorld(new LevelSelector(1));
-                else if (getWorld() instanceof Level2) Greenfoot.setWorld(new LevelSelector(2));
-                else if (getWorld() instanceof Level3) Greenfoot.setWorld(new LevelSelector(3));
+                if (getWorld() instanceof Tutorial) if (Globals.level < 1) Globals.level = 1;
+                else if (getWorld() instanceof Level1) if (Globals.level < 2) Globals.level = 2;
+                else if (getWorld() instanceof Level2) if (Globals.level < 3) Globals.level = 3;
+                else if (getWorld() instanceof Level3) if (Globals.level < 4) Globals.level = 4;
+                Greenfoot.setWorld(new LevelSelector());
             } else {
-                setRelativeLocation(0, 2.0);
+                setRelativeLocation(5.0, 0);
             }
             endingFrame += 1;
             doGravity();
