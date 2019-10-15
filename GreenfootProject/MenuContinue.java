@@ -15,7 +15,7 @@ public class MenuContinue extends ActorsMenu
     {
         if (Greenfoot.mouseClicked(this))
         {
-            //continue from save file here.
+            Saver.loadGame();
         }
         MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null) {
@@ -27,8 +27,7 @@ public class MenuContinue extends ActorsMenu
                 {
                     overObjectCheck = true;
                     if (!overObject) {
-                        getImage().scale(normalWidth + normalWidth / 10
-                            , normalHeight + normalHeight / 10);
+                        getImage().scale(normalWidth + normalWidth / 10, normalHeight + normalHeight / 10);
                         overObject = true;
                     }
                 }

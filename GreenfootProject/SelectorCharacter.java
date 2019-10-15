@@ -14,8 +14,6 @@ public class SelectorCharacter extends Physics
     private int level;
     private double newX;
     private double newY;
-    private double leftoverX;
-    private double leftoverY;
     private int movingFrame;
     public GreenfootImage cropImage(String image) {
         GreenfootImage cutImage = new GreenfootImage (image);
@@ -27,7 +25,7 @@ public class SelectorCharacter extends Physics
         setImage(imageFront);
     }
     private void moveFromTo(int currentu, int nextu) {
-        if (next - 1 < Globals.level) {
+        if (nextu <= Globals.level) {
             this.current = currentu;
             this.next = nextu;
             currentX = LevelSelector.getLevelX(current);
@@ -41,10 +39,7 @@ public class SelectorCharacter extends Physics
         }
     }
     public void move() {
-        leftoverX = 0;//(-newX/30 - (int) -newX/30) / 2;
-        leftoverY = 0;//(-newY/30 - (int) -newY/30) / 2;
-        System.out.println(leftoverX + ", " + leftoverY);
-        setNewLocation(getX() -(newX/30 + leftoverX), getY() -(newY/30 + leftoverY));
+        setNewLocation(getX() -(newX/30), getY() -(newY/30));
         if (current != 0) {
             if (next > current) {
                 if (next < 13 || next > 16) {
@@ -70,7 +65,6 @@ public class SelectorCharacter extends Physics
             if (movingFrame >= 30) {
                 movingFrame = 0;
                 moving = false;
-                System.out.println("X: " + getX() + ", " + (LevelSelector.getLevelX(next) -LevelSelector.scrolledX) + ", Y: " + getY() + ", " + (LevelSelector.getLevelY(next) - LevelSelector.scrolledY));
                 setLocation((LevelSelector.getLevelX(next) -LevelSelector.scrolledX),(LevelSelector.getLevelY(next) - LevelSelector.scrolledY));
             } else {
                 movingFrame ++;
@@ -106,7 +100,6 @@ public class SelectorCharacter extends Physics
                 }
             }
             if("enter".equals(key)) {
-                System.out.println(Globals.selectedLevel);
                 if (Globals.selectedLevel == 0) Greenfoot.setWorld(new Tutorial());
                 else if (Globals.selectedLevel == 1) Greenfoot.setWorld(new Level1());
                 else if (Globals.selectedLevel == 2) Greenfoot.setWorld(new Level2());

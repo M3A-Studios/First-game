@@ -111,7 +111,6 @@ public class LevelSelector extends World
         Actor levelNode26 = new LevelNode("Lava", 26);
         Actor levelNode27 = new LevelNode("Lava", 27);
         Actor levelNode28 = new LevelNode("Lava", 28);
-        Actor levelNode29 = new LevelNode("Lava", 29);
         addObject(levelNode, getLevelX(0), getLevelY(0));
         addObject(levelNode1, getLevelX(1), getLevelY(1));
         addObject(levelNode2, getLevelX(2), getLevelY(2));
@@ -141,13 +140,18 @@ public class LevelSelector extends World
         addObject(levelNode26, getLevelX(26), getLevelY(26));
         addObject(levelNode27, getLevelX(27), getLevelY(27));
         addObject(levelNode28, getLevelX(28), getLevelY(28));
-        addObject(levelNode29, getLevelX(29), getLevelY(29));
+        if (Globals.level >= 29) {
+            Actor levelNode29 = new LevelNode("Lava", 29);
+            addObject(levelNode29, getLevelX(29), getLevelY(29));
+        }
     }
     public LevelSelector() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
         Globals.selectedLevel = Globals.lastLevel;
         renderWorld();
         initiateScroll("test.png");
+        
+        Saver.saveGame();
     }
     public static int getScaledX(double x) {
         return (int) ((x/1920) * (double) Options.screenWidth);
