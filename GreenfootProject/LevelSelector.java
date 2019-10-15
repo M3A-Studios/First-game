@@ -7,9 +7,12 @@ import java.util.Arrays;
 
 public class LevelSelector extends World
 {
-    public static int selectedLevel = 0;
-    public static int dsx = 0;
-    public static int dsy = 0;
+    public static double dsx = 0;
+    public static double dsy = 0;
+    private static double leftoverDsx;
+    private static double leftoverDsy;
+    public static int scrolledX;
+    public static int scrolledY;
     Scroller scroller; // the object that performs the scrolling
     Actor scrollActor; // an actor to stay in view*
     public static int getLevelX(int level) {
@@ -142,7 +145,7 @@ public class LevelSelector extends World
     }
     public LevelSelector() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
-        selectedLevel = Globals.lastLevel;
+        Globals.selectedLevel = Globals.lastLevel;
         renderWorld();
         initiateScroll("test.png");
     }
@@ -156,20 +159,35 @@ public class LevelSelector extends World
         GreenfootImage bg = new GreenfootImage(backgroundImage); // creates an image to scroll (adjust as needed)
         bg.scale(Options.screenWidth * 2, Options.screenHeight * 5);
         
+        Globals.selectedLevel = Globals.lastLevel;
+        
         scroller = new Scroller(this, bg, Options.screenWidth * 2, Options.screenHeight * 5); 
         scrollActor = new SelectorCharacter("green"); 
-        addObject(scrollActor, getLevelX(selectedLevel), getLevelY(selectedLevel));
+        addObject(scrollActor, getLevelX(Globals.selectedLevel), getLevelY(Globals.selectedLevel));
         
-        scroll(Options.screenWidth * 2, Options.screenHeight * 5); //scroll relatively to 0,0 so directly to these cords
+        System.out.println(getLevelY(Globals.selectedLevel));
+        if (Globals.selectedLevel <= 12) {
+            scroll(Options.screenWidth * 2, getLevelY(Globals.selectedLevel) - Options.screenHeight/2);
+        } else if (Globals.selectedLevel <= 17) {
+            scroll(getLevelX(Globals.selectedLevel), 0);
+        } else {
+            scroll(Options.screenWidth * 1, getLevelY(Globals.selectedLevel) - Options.screenHeight/2);
+        }
     }
     public void scroll(int dsx2, int dsy2) {
         scroller.scroll(dsx2, dsy2);
     }
     public void act() {
         scroll();
+        scrolledX = scroller.getScrolledX();
+        scrolledY = scroller.getScrolledY();
     }
     public void scroll() {
-        scroller.scroll(dsx, dsy);
+        dsx = dsx + leftoverDsx;
+        dsy = dsy + leftoverDsy;
+        scroller.scroll((int) dsx, (int) dsy);
+        leftoverDsx = dsx - (int) dsx;
+        leftoverDsy = dsy - (int) dsy;
         dsx = 0;
         dsy = 0;
     }

@@ -94,7 +94,7 @@ public class Player extends Physics
                 if ((Globals.lastLevel + 1) > Globals.level) Globals.level = Globals.lastLevel + 1;
                 Greenfoot.setWorld(new LevelSelector());
             } else {
-                setRelativeLocation(5.0, 0);
+                setRelativeLocation(2.5, 0);
             }
             endingFrame += 1;
             doGravity();

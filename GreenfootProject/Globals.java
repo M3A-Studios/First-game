@@ -11,6 +11,7 @@ public class Globals
     
     public static int level = 28;
     public static int lastLevel = 0;
+    public static int selectedLevel = 0;
     
     public static Integer platforms[] = {74,75,76,77,92,93,94,95,110,111,112,113,128,129,130,131,146,147
         ,148,149,164,165,166,167};
