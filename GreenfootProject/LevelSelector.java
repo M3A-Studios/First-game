@@ -165,7 +165,6 @@ public class LevelSelector extends World
         scrollActor = new SelectorCharacter("green"); 
         addObject(scrollActor, getLevelX(Globals.selectedLevel), getLevelY(Globals.selectedLevel));
         
-        System.out.println(getLevelY(Globals.selectedLevel));
         if (Globals.selectedLevel <= 12) {
             scroll(Options.screenWidth * 2, getLevelY(Globals.selectedLevel) - Options.screenHeight/2);
         } else if (Globals.selectedLevel <= 17) {
