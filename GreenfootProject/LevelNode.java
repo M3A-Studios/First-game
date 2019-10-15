@@ -9,6 +9,7 @@ public class LevelNode extends Actor
         } else {
             image = new GreenfootImage(type + "Node.png");
         }
-        setImage(image);
+        image.scale((Options.blockSize * 3),(Options.blockSize * 3));
+        if (level < 29 || level == 29 && Globals.level >= 29) setImage(image);
     } 
 }

@@ -53,6 +53,8 @@ public class Player extends Physics
     }
     public void act() 
     {
+        String key = Greenfoot.getKey();
+        if("escape".equals(key)) {Greenfoot.setWorld(new LevelSelector());}
         if (!dead) setRelativeLocation(Globals.entityOffsetX,Globals.entityOffsetY);
         if (!started) {
             if (introFrame == 0) { 
@@ -85,10 +87,11 @@ public class Player extends Physics
             }
             if (endingFrame >= 100) {
                 setImage(imageStand);
-                if (getWorld() instanceof Tutorial) if (Globals.level < 1) Globals.level = 1;
-                else if (getWorld() instanceof Level1) if (Globals.level < 2) Globals.level = 2;
-                else if (getWorld() instanceof Level2) if (Globals.level < 3) Globals.level = 3;
-                else if (getWorld() instanceof Level3) if (Globals.level < 4) Globals.level = 4;
+                if (getWorld() instanceof Tutorial) Globals.lastLevel = 0;
+                else if (getWorld() instanceof Level1)Globals.lastLevel = 1;
+                else if (getWorld() instanceof Level2)Globals.lastLevel = 2;
+                else if (getWorld() instanceof Level3)Globals.lastLevel = 3;
+                if ((Globals.lastLevel + 1) > Globals.level) Globals.level = Globals.lastLevel + 1;
                 Greenfoot.setWorld(new LevelSelector());
             } else {
                 setRelativeLocation(5.0, 0);
@@ -97,7 +100,6 @@ public class Player extends Physics
             doGravity();
         } else if (!dead) {
             doGravity();
-            String key = Greenfoot.getKey();
             if(Options.leftButtonPlayer1.equals(key)) {leftTime = 0;}
             if(Options.rightButtonPlayer1.equals(key)) {rightTime = 0;}
             if(Options.jumpButtonPlayer1.equals(key)) {jumpTime = 0;}
