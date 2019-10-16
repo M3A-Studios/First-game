@@ -8,6 +8,11 @@ public class Menu extends World
         super(Options.screenWidth, Options.screenHeight, 1, false);
         prepare();
         setBackground(animation.getCurrentImage());
+        renderMenu();
+    }
+    private void renderMenu() {
+        ActorsOptions menu = new ActorsOptions();
+        addObject (menu, 0, 0);
     }
     public void act() {
         frame ++;

@@ -16,12 +16,14 @@ public class MenuOptions extends ActorsOptions
     } 
     public void act() 
     {
+        String key = Greenfoot.getKey();
+        if("escape".equals(key)) {ActorsOptions.optionsMenu();}
         if (Greenfoot.mouseClicked(this))
         {
             optionsMenu();
         }
         MouseInfo mouse = Greenfoot.getMouseInfo();
-        if (mouse != null) {
+        if (mouse != null && !ActorsOptions.optionsOpen) {
             List objects = getWorld().getObjectsAt(mouse.getX(), mouse.getY(), getClass());
             boolean overObjectCheck = false;
             for (Object object : objects)

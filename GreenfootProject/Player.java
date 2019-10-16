@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Physics
 {
     public static int health = 6;
-    boolean started = false;
+    public boolean started = false;
     private int animationFrame = 0;
     public int introFrame = 0;
     public boolean endingAnimation = false;
@@ -58,7 +58,7 @@ public class Player extends Physics
     public void act() 
     {
         String key = Greenfoot.getKey();
-        if("escape".equals(key)) {Greenfoot.setWorld(new LevelSelector());}
+        if("escape".equals(key) && !endingAnimation && !dead) {Greenfoot.setWorld(new LevelSelector());}
         if (!dead) setRelativeLocation(Globals.entityOffsetX,Globals.entityOffsetY);
         if (!started) {
             if (introFrame == 0) { 
@@ -117,6 +117,8 @@ public class Player extends Physics
                     leftTime += 1;
                     if (leftTime > 60) leftTime = 60;
                     moveLeft(leftTime / 10 + 4.0);
+                } else {
+                    leftTime = 0;
                 }
             } 
             if(Greenfoot.isKeyDown(Options.rightButtonPlayer1))
@@ -125,13 +127,15 @@ public class Player extends Physics
                     rightTime += 1;
                     if (rightTime > 60) rightTime = 60;
                     moveRight(rightTime / 10 + 4.0);
-                    if (endingFrame % (int) (22 - 2*(rightTime / 10)) == 0) {
+                    if (animationFrame % (int) (22 - 2*(rightTime / 10)) == 0) {
                         if (getImage() == imageWalk1) {
                             setImage(imageWalk2);
                         } else {
                             setImage(imageWalk1);
                         }
                     }
+                } else {
+                    rightTime = 0;
                 }
             }
             if(Greenfoot.isKeyDown(Options.jumpButtonPlayer1) ||  Greenfoot.isKeyDown(Options.jumpButton2Player1)) // Only jump if on ground

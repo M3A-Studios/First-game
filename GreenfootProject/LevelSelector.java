@@ -172,12 +172,17 @@ public class LevelSelector extends World
         addObject (hudNumber10, 0, 0);
         addObject (hudNumber11, 0, 0);
     }
+    private void renderMenu() {
+        ActorsOptions menu = new ActorsOptions();
+        addObject (menu, 0, 0);
+    }
     public LevelSelector() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
         Globals.selectedLevel = Globals.lastLevel;
         renderWorld();
         initiateScroll("test.png");
         
+        renderMenu();
         Saver.saveGame();
     }
     public static int getScaledX(double x) {

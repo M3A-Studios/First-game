@@ -127,6 +127,7 @@ public class Levels extends World
             }
         } 
         renderHud();
+        renderMenu();
     }
     public void renderHud() {
         HudCoin hudCoin = new HudCoin();
@@ -153,6 +154,10 @@ public class Levels extends World
         addObject (hudNumber6, 0, 0);
         addObject (hudNumber7, 0, 0);
         addObject (hudNumber8, 0, 0);
+    }
+    private void renderMenu() {
+        ActorsOptions menu = new ActorsOptions();
+        addObject (menu, 0, 0);
     }
     public void Add(Actor nextBlock) {
         addObject(nextBlock, width*Options.blockSize + Options.blockSize/2,

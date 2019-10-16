@@ -18,7 +18,7 @@ public class MenuContinue extends ActorsMenu
             Saver.loadGame();
         }
         MouseInfo mouse = Greenfoot.getMouseInfo();
-        if (mouse != null) {
+        if (mouse != null && !ActorsOptions.optionsOpen) {
             List objects = getWorld().getObjectsAt(mouse.getX(), mouse.getY(), getClass());
             boolean overObjectCheck = false;
             for (Object object : objects)
