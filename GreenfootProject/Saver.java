@@ -30,7 +30,8 @@ public class Saver extends Actor
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("save.txt"));
             
-            bw.write("MaxLevel:" + Globals.level +"\n" + "LastLevel:" + Globals.lastLevel +"\n" + "SelectedLevel:" + Globals.selectedLevel +"\n" + "Coins:" + Globals.coins +"\n");
+            bw.write("MaxLevel:" + Globals.level +"\n" + "LastLevel:" + Globals.lastLevel +"\n" + "SelectedLevel:" + Globals.selectedLevel +"\n" + "Coins:" + Globals.coins +"\n" 
+                    + "Score:" +Globals.score +"\n");
             bw.newLine();
             
             bw.close();
@@ -70,6 +71,10 @@ public class Saver extends Actor
            if (line.contains("Coins:")) {
                line = line.replaceAll("Coins:","");
                Globals.coins = Integer.parseInt(line);
+           }
+           if (line.contains("Score:")) {
+               line = line.replaceAll("Score:","");
+               Globals.score = Integer.parseInt(line);
            }
         }
         dataReader.close();

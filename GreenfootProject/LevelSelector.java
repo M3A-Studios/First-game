@@ -157,6 +157,20 @@ public class LevelSelector extends World
         addObject (hudNumber2, 0, 0);
         addObject (hudNumber3, 0, 0);
         addObject (hudNumber4, 0, 0);
+        HudNumber hudNumber5 = new HudNumber("score", 1);
+        HudNumber hudNumber6 = new HudNumber("score", 2);
+        HudNumber hudNumber7 = new HudNumber("score", 3);
+        HudNumber hudNumber8 = new HudNumber("score", 4);
+        HudNumber hudNumber9 = new HudNumber("score", 5);
+        HudNumber hudNumber10 = new HudNumber("score", 6);
+        HudNumber hudNumber11 = new HudNumber("score", 7);
+        addObject (hudNumber5, 0, 0);
+        addObject (hudNumber6, 0, 0);
+        addObject (hudNumber7, 0, 0);
+        addObject (hudNumber8, 0, 0);
+        addObject (hudNumber9, 0, 0);
+        addObject (hudNumber10, 0, 0);
+        addObject (hudNumber11, 0, 0);
     }
     public LevelSelector() {
         super(Options.screenWidth, Options.screenHeight, 1, false);

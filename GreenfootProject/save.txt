@@ -1,5 +1,6 @@
 MaxLevel:4
-LastLevel:0
-SelectedLevel:0
-Coins:11
+LastLevel:1
+SelectedLevel:1
+Coins:134
+Score:2220
 

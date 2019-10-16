@@ -145,6 +145,9 @@ public class Player extends Physics
             Coin coin = (Coin)getOneIntersectingObject(Coin.class);
             if (coin != null) {
                 Globals.coinsThisLevel = Globals.coinsThisLevel + coin.value;
+                if (Globals.coinsThisLevel > 999) Globals.coinsThisLevel = 999;
+                Globals.scoreThisLevel = Globals.scoreThisLevel + coin.value * 10;
+                if (Globals.scoreThisLevel > 99999) Globals.scoreThisLevel = 99999;
                 getWorld().removeObject(coin);
             }
             if (invulnerabilityFrames > 0) {
@@ -166,6 +169,11 @@ public class Player extends Physics
             if (finishedLevel()) {
                 endingAnimation = true;
                 Globals.coins = Globals.coins + Globals.coinsThisLevel;
+                if (Globals.coins > 9999) Globals.coins = 9999;
+                Globals.scoreThisLevel = Globals.scoreThisLevel + 1000;
+                if (Globals.scoreThisLevel > 99999) Globals.scoreThisLevel = 99999;
+                Globals.score = Globals.score + Globals.scoreThisLevel;
+                if (Globals.score > 9999999) Globals.score = 9999999;
             }
             if (atBottom()) {
                 dead = true;

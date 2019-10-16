@@ -112,9 +112,9 @@ public class Levels extends World
                 } else if (world[i] - 1 == 173) {
                     nextBlock = new Coin(world[i] - 1, 2);
                 } else if (world[i] - 1 == 175) {
-                    nextBlock = new Coin(world[i] - 1, 10);
-                } else if (world[i] - 1 == 174) {
                     nextBlock = new Coin(world[i] - 1, 5);
+                } else if (world[i] - 1 == 174) {
+                    nextBlock = new Coin(world[i] - 1, 10);
                 } else if (world[i] - 1 == 38 || world[i] - 1 == 39 || world[i] - 1 == 40) {
                     nextBlock = new HalfSaw();
                 } else if (world[i] != 0){
@@ -143,6 +143,16 @@ public class Levels extends World
         addObject (hudNumber1, 0, 0);
         addObject (hudNumber2, 0, 0);
         addObject (hudNumber3, 0, 0);
+        HudNumber hudNumber4 = new HudNumber("score", 1);
+        HudNumber hudNumber5 = new HudNumber("score", 2);
+        HudNumber hudNumber6 = new HudNumber("score", 3);
+        HudNumber hudNumber7 = new HudNumber("score", 4);
+        HudNumber hudNumber8 = new HudNumber("score", 5);
+        addObject (hudNumber4, 0, 0);
+        addObject (hudNumber5, 0, 0);
+        addObject (hudNumber6, 0, 0);
+        addObject (hudNumber7, 0, 0);
+        addObject (hudNumber8, 0, 0);
     }
     public void Add(Actor nextBlock) {
         addObject(nextBlock, width*Options.blockSize + Options.blockSize/2,
@@ -160,6 +170,7 @@ public class Levels extends World
             Options.smallerScreen = 1;
         }
         Globals.coinsThisLevel = 0;
+        Globals.scoreThisLevel = 0;
     }
     public void initiateScroll(String backgroundImage, int x, int y) {
         GreenfootImage bg = new GreenfootImage(backgroundImage); // creates an image to scroll (adjust as needed)
