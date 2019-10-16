@@ -12,7 +12,7 @@ public class Level1 extends Levels
         Globals.startingHeight = startHeight; //set the start height to this level's startheight
         
         getWorldMap(getClass().getName()); //Reading the world file to render later. because I like to overdo stuff
-        renderWorld(); //renders the actual world objects like blocks and enemies
+        renderWorld(); //renders the actual world objects like blocks and enemiess
         initiateScroll(Globals.backgroundImage, -40, Globals.worldHeight - (Globals.startingHeight * Options.blockSize - Options.blockSize / 4)); //make the camera and update it to x, y
         
     } 

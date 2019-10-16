@@ -101,9 +101,21 @@ public class Levels extends World
                     nextBlock = new SlopeLeft(world[i] - 1);
                 } else if (check(Globals.slopeRights, world[i] - 1)) {
                     nextBlock = new SlopeRight(world[i] - 1);
+                } else if (check(Globals.lavas, world[i] - 1)) {
+                    nextBlock = new Lava(world[i] - 1);
+                } else if (check(Globals.waters, world[i] - 1)) {
+                    nextBlock = new Water(world[i] - 1);
+                } else if (check(Globals.spikes, world[i] - 1)) {
+                    nextBlock = new Spike(world[i] - 1);
                 } else if (check(Globals.finishFlag, world[i] - 1)) {
                     nextBlock = new FinishFlag(world[i] - 1);
-                }else if (world[i] - 1 == 38 || world[i] - 1 == 39 || world[i] - 1 == 40) {
+                } else if (world[i] - 1 == 173) {
+                    nextBlock = new Coin(world[i] - 1, 2);
+                } else if (world[i] - 1 == 175) {
+                    nextBlock = new Coin(world[i] - 1, 10);
+                } else if (world[i] - 1 == 174) {
+                    nextBlock = new Coin(world[i] - 1, 5);
+                } else if (world[i] - 1 == 38 || world[i] - 1 == 39 || world[i] - 1 == 40) {
                     nextBlock = new HalfSaw();
                 } else if (world[i] != 0){
                     nextBlock = new Solid(world[i] - 1); 
@@ -114,6 +126,23 @@ public class Levels extends World
                 Add(nextBlock); 
             }
         } 
+        renderHud();
+    }
+    public void renderHud() {
+        HudCoin hudCoin = new HudCoin();
+        addObject (hudCoin, 0, 0);
+        HudHeart hudHeart1 = new HudHeart(1);
+        HudHeart hudHeart2 = new HudHeart(2);
+        HudHeart hudHeart3 = new HudHeart(3);
+        addObject (hudHeart1, 0, 0);
+        addObject (hudHeart2, 0, 0);
+        addObject (hudHeart3, 0, 0);
+        HudNumber hudNumber1 = new HudNumber("coins", 1);
+        HudNumber hudNumber2 = new HudNumber("coins", 2);
+        HudNumber hudNumber3 = new HudNumber("coins", 3);
+        addObject (hudNumber1, 0, 0);
+        addObject (hudNumber2, 0, 0);
+        addObject (hudNumber3, 0, 0);
     }
     public void Add(Actor nextBlock) {
         addObject(nextBlock, width*Options.blockSize + Options.blockSize/2,
@@ -130,6 +159,7 @@ public class Levels extends World
         if (Options.screenHeight < 1080) {
             Options.smallerScreen = 1;
         }
+        Globals.coinsThisLevel = 0;
     }
     public void initiateScroll(String backgroundImage, int x, int y) {
         GreenfootImage bg = new GreenfootImage(backgroundImage); // creates an image to scroll (adjust as needed)

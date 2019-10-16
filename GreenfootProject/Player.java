@@ -2,12 +2,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Player extends Physics
 {
-    public int health = 6;
+    public static int health = 6;
     boolean started = false;
     private int animationFrame = 0;
     public int introFrame = 0;
     public boolean endingAnimation = false;
     public int endingFrame = 0;
+    private int invulnerabilityFrames = 0;
     public boolean dead = false;
     public int deathAnimationFrame = 0;
     private int leftTime = 0;
@@ -26,6 +27,7 @@ public class Player extends Physics
     public GreenfootImage imageClimb1;
     public GreenfootImage imageClimb2;
     public GreenfootImage imageHit;
+    public GreenfootImage imageTransparent;
     public GreenfootImage cropImage(String image) {
         GreenfootImage cutImage = new GreenfootImage (image);
         cutImage.scale(Options.blockSize,Options.blockSize);
@@ -33,6 +35,7 @@ public class Player extends Physics
     }
     Player(String color, int player) {
         setGravity(1);
+        health = 6;
         
         imageFront = cropImage(color + "Front.png");
         imageDuck = cropImage(color + "Duck.png");
@@ -44,12 +47,13 @@ public class Player extends Physics
         imageSwim2 = cropImage(color + "Swim2.png");
         imageClimb1 = cropImage(color + "Climb1.png");
         imageClimb2 = cropImage(color + "Climb2.png");
-        
+        imageTransparent = cropImage("transparent.png");
         setBarrierClasses(new Class[]{Solid.class});
         setPlatformClasses(new Class[]{Platform.class});
         setSlopeLeftClasses(new Class[]{SlopeLeft.class});
         setSlopeRightClasses(new Class[]{SlopeRight.class});
-        setDamagingClasses(new Class[]{HalfSaw.class});
+        setDamagingClasses(new Class[]{HalfSaw.class, Spike.class});
+        setSuperDamagingClasses(new Class[]{Lava.class});
     }
     public void act() 
     {
@@ -100,6 +104,7 @@ public class Player extends Physics
             doGravity();
         } else if (!dead) {
             doGravity();
+            setImage(imageFront);
             if(Options.leftButtonPlayer1.equals(key)) {leftTime = 0;}
             if(Options.rightButtonPlayer1.equals(key)) {rightTime = 0;}
             if(Options.jumpButtonPlayer1.equals(key)) {jumpTime = 0;}
@@ -137,14 +142,38 @@ public class Player extends Physics
                 } 
                 jumpTime += 1;
             }
+            Coin coin = (Coin)getOneIntersectingObject(Coin.class);
+            if (coin != null) {
+                Globals.coinsThisLevel = Globals.coinsThisLevel + coin.value;
+                getWorld().removeObject(coin);
+            }
+            if (invulnerabilityFrames > 0) {
+                invulnerabilityFrames -= 1;
+                if (invulnerabilityFrames % 4 >= 2) {
+                    setImage(imageTransparent);
+                } else {
+                    setImage(imageFront);
+                }
+            } else {
+                if (tookDamage()) {
+                    health -= 1;
+                    invulnerabilityFrames = 60;
+                }
+            }
+            if (tookSuperDamage()) {
+                health = 0;
+            }
             if (finishedLevel()) {
                 endingAnimation = true;
+                Globals.coins = Globals.coins + Globals.coinsThisLevel;
             }
             if (atBottom()) {
                 dead = true;
                 health = 0;
             } else {
-            dead = died(); //set dead state to the died check. so true or false
+                if (health < 1) {
+                    dead = true;
+                }
             }
         } else if (dead) {
             Globals.alive = false;
@@ -160,6 +189,7 @@ public class Player extends Physics
             deathAnimationFrame += 1;
             if (getY() > Options.screenHeight + getImage().getHeight()) {
                 dead = false;
+                health = 6;
                 Globals.alive = true;
                 if (getWorld() instanceof Tutorial) Greenfoot.setWorld(new Tutorial());
                 else if (getWorld() instanceof Level1) Greenfoot.setWorld(new Level1());

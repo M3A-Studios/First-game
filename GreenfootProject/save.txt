@@ -1,5 +1,5 @@
-MaxLevel:21
-LastLevel:1
-SelectedLevel:1
-Coins:0
+MaxLevel:4
+LastLevel:0
+SelectedLevel:0
+Coins:11
 

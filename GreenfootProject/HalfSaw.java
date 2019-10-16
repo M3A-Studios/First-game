@@ -34,7 +34,7 @@ public class HalfSaw extends Enemy
     public void act() 
     {
         if (!started) {
-            setNewLocation(getX(), getY() + Options.blockSize / 4 - 1);
+            setNewLocation(getX(), getY() + Options.blockSize / 4);
             startingX = getX();
             startingY = getX();
             started = true;

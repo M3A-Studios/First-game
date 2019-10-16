@@ -144,6 +144,19 @@ public class LevelSelector extends World
             Actor levelNode29 = new LevelNode("Lava", 29);
             addObject(levelNode29, getLevelX(29), getLevelY(29));
         }
+        renderHud();
+    }
+    private void renderHud() {
+        HudCoin hudCoin = new HudCoin();
+        addObject (hudCoin, 0, 0);
+        HudNumber hudNumber1 = new HudNumber("coins", 1);
+        HudNumber hudNumber2 = new HudNumber("coins", 2);
+        HudNumber hudNumber3 = new HudNumber("coins", 3);
+        HudNumber hudNumber4 = new HudNumber("coins", 4);
+        addObject (hudNumber1, 0, 0);
+        addObject (hudNumber2, 0, 0);
+        addObject (hudNumber3, 0, 0);
+        addObject (hudNumber4, 0, 0);
     }
     public LevelSelector() {
         super(Options.screenWidth, Options.screenHeight, 1, false);

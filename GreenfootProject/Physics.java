@@ -43,7 +43,7 @@ public class Physics extends Actor
             }
         return false;
     }
-    public boolean died () {
+    public boolean tookDamage () {
         for (Class c: damaging) {
             if (getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 - 1, c) != null //bottom right
                 || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/-2 + 1, c) != null //top right
@@ -51,11 +51,22 @@ public class Physics extends Actor
                 || getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 - 1, c) != null) //bottom left
                 {
                 return true;
-                }
+            }
         }
         return false;
     }
-    
+    public boolean tookSuperDamage() {
+        for (Class c: superDamaging) {
+            if (getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 - 1, c) != null //bottom right
+                || getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/-2 + 1, c) != null //top right
+                || getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/-2 + 1, c) != null //top left
+                || getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 - 1, c) != null) //bottom left
+                {
+                return true;
+            }
+        }
+        return false;
+    }
     public void moveRight(double speed) { //moving right method
         speed = speed * Options.blockSize / 64;
         if (canMoveRight(speed)) //check if we can move right, check method below
@@ -235,6 +246,9 @@ public class Physics extends Actor
     }
     protected void setDamagingClasses(Class[] c) {
         damaging = c;
+    }
+    protected void setSuperDamagingClasses(Class[] c) {
+        superDamaging = c;
     }
     protected void setGravity(int g) //set the object's acceleration (pixels/s to slow down by vertically
     {
