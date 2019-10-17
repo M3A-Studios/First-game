@@ -1,6 +1,6 @@
 MaxLevel:4
 LastLevel:3
 SelectedLevel:3
-Coins:12
-Score:4120
+Coins:20
+Score:5200
 

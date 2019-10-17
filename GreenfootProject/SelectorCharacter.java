@@ -103,36 +103,7 @@ public class SelectorCharacter extends Physics
                     }
                 }
                 if("enter".equals(key)) {
-                    if (Globals.selectedLevel == 0) Greenfoot.setWorld(new Tutorial());
-                    else if (Globals.selectedLevel == 1) Greenfoot.setWorld(new Level1());
-                    else if (Globals.selectedLevel == 2) Greenfoot.setWorld(new Level2());
-                    else if (Globals.selectedLevel == 3) Greenfoot.setWorld(new Level3());
-                    else if (Globals.selectedLevel == 4) Greenfoot.setWorld(new Level4());
-                    else if (Globals.selectedLevel == 5) Greenfoot.setWorld(new Level5());
-                    else if (Globals.selectedLevel == 6) Greenfoot.setWorld(new Level6());
-                    else if (Globals.selectedLevel == 7) Greenfoot.setWorld(new Level7());
-                    else if (Globals.selectedLevel == 8) Greenfoot.setWorld(new Level8());
-                    else if (Globals.selectedLevel == 9) Greenfoot.setWorld(new Level9());
-                    else if (Globals.selectedLevel == 10) Greenfoot.setWorld(new Level10());
-                    else if (Globals.selectedLevel == 11) Greenfoot.setWorld(new Level11());
-                    else if (Globals.selectedLevel == 12) Greenfoot.setWorld(new Level12());
-                    else if (Globals.selectedLevel == 13) Greenfoot.setWorld(new Level13());
-                    else if (Globals.selectedLevel == 14) Greenfoot.setWorld(new Level14());
-                    else if (Globals.selectedLevel == 15) Greenfoot.setWorld(new Level15());
-                    else if (Globals.selectedLevel == 16) Greenfoot.setWorld(new Level16());
-                    else if (Globals.selectedLevel == 17) Greenfoot.setWorld(new Level17());
-                    else if (Globals.selectedLevel == 18) Greenfoot.setWorld(new Level18());
-                    else if (Globals.selectedLevel == 19) Greenfoot.setWorld(new Level19());
-                    else if (Globals.selectedLevel == 20) Greenfoot.setWorld(new Level20());
-                    else if (Globals.selectedLevel == 21) Greenfoot.setWorld(new Level21());
-                    else if (Globals.selectedLevel == 22) Greenfoot.setWorld(new Level22());
-                    else if (Globals.selectedLevel == 23) Greenfoot.setWorld(new Level23());
-                    else if (Globals.selectedLevel == 24) Greenfoot.setWorld(new Level24());
-                    else if (Globals.selectedLevel == 25) Greenfoot.setWorld(new Level25());
-                    else if (Globals.selectedLevel == 26) Greenfoot.setWorld(new Level26());
-                    else if (Globals.selectedLevel == 27) Greenfoot.setWorld(new Level27());
-                    else if (Globals.selectedLevel == 28) Greenfoot.setWorld(new Level28());
-                    else if (Globals.selectedLevel == 29) Greenfoot.setWorld(new Level29());
+                    Greenfoot.setWorld(new Levels(Globals.selectedLevel));
                 }
             }
         } 

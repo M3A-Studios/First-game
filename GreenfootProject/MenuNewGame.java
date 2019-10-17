@@ -21,7 +21,7 @@ public class MenuNewGame extends ActorsMenu
             Globals.selectedLevel = 0;
             Globals.coins = 0;
             
-            Greenfoot.setWorld(new Tutorial());
+            Greenfoot.setWorld(new Levels(0));
         }
         MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null && !ActorsOptions.optionsOpen) {

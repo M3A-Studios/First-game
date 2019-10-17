@@ -81,7 +81,7 @@ public class Saver extends Actor
         if (Globals.level != 0) {
             Greenfoot.setWorld(new LevelSelector());
         } else {
-            Greenfoot.setWorld(new Tutorial());
+            Greenfoot.setWorld(new Levels(0));
         }
     } 
 } 

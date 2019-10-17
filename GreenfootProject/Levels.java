@@ -18,6 +18,19 @@ public class Levels extends World
     Scroller scroller; // the object that performs the scrolling
     Actor scrollActor; // an actor to stay in view*
     
+    public void act() //scroll the map every frame
+    {
+        scroll();
+    }
+    private static int getStartingHeight(int level) {
+        if (level == 0) return 3;
+        else if (level == 1) return 3;
+        else if (level == 2) return 3;
+        else return 4;
+    }
+    private static String getBackground(int level) {
+        return "background.png";
+    }
     protected static void getWorldMap (String level) {
         //reset the level layout to blank
         levelWidth = 0;
@@ -169,8 +182,17 @@ public class Levels extends World
                 .contains(toCheckValue);
         return test;
     }
-    public Levels() {
+    public Levels(int level) {
         super(Options.screenWidth, Options.screenHeight, 1, false);
+        
+        Globals.backgroundImage = getBackground(level);
+        Globals.startingHeight = getStartingHeight(level);
+        
+        getWorldMap("Level" + level);
+        renderWorld();
+        
+        initiateScroll(Globals.backgroundImage, -40, Globals.worldHeight - (Globals.startingHeight * Options.blockSize - Options.blockSize / 4));
+        
         if (Options.screenHeight < 1080) {
             Options.smallerScreen = 1;
         }

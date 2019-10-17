@@ -58,6 +58,7 @@ public class Player extends Physics
     public void act() 
     {
         String key = Greenfoot.getKey();
+        System.out.println(getX() + ", " + getY());
         if("escape".equals(key) && !endingAnimation && !dead) {Greenfoot.setWorld(new LevelSelector());}
         if (!dead) setRelativeLocation(Globals.entityOffsetX,Globals.entityOffsetY);
         if (!started) {
@@ -91,10 +92,7 @@ public class Player extends Physics
             }
             if (endingFrame >= 100) {
                 setImage(imageStand);
-                if (getWorld() instanceof Tutorial) Globals.lastLevel = 0;
-                else if (getWorld() instanceof Level1)Globals.lastLevel = 1;
-                else if (getWorld() instanceof Level2)Globals.lastLevel = 2;
-                else if (getWorld() instanceof Level3)Globals.lastLevel = 3;
+                Globals.lastLevel = Globals.selectedLevel;
                 if ((Globals.lastLevel + 1) > Globals.level) Globals.level = Globals.lastLevel + 1;
                 Greenfoot.setWorld(new LevelSelector());
             } else {
@@ -203,10 +201,7 @@ public class Player extends Physics
                 dead = false;
                 health = 6;
                 Globals.alive = true;
-                if (getWorld() instanceof Tutorial) Greenfoot.setWorld(new Tutorial());
-                else if (getWorld() instanceof Level1) Greenfoot.setWorld(new Level1());
-                else if (getWorld() instanceof Level2) Greenfoot.setWorld(new Level2());
-                else if (getWorld() instanceof Level3) Greenfoot.setWorld(new Level3());
+                Greenfoot.setWorld(new Levels(Globals.selectedLevel));
             }
         }
     }     
