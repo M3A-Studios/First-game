@@ -58,12 +58,11 @@ public class Player extends Physics
     public void act() 
     {
         String key = Greenfoot.getKey();
-        System.out.println(getX() + ", " + getY());
         if("escape".equals(key) && !endingAnimation && !dead) {Greenfoot.setWorld(new LevelSelector());}
         if (!dead) setRelativeLocation(Globals.entityOffsetX,Globals.entityOffsetY);
         if (!started) {
             if (introFrame == 0) { 
-                setNewLocation(-32.0, (Options.screenHeight - Options.screenHeight/8*2));
+                setNewLocation(-Options.blockSize/2, (Options.screenHeight - Options.screenHeight/8*2));
                 setDoubleY(getY());
                 setDoubleX(getX());
             }
@@ -136,7 +135,7 @@ public class Player extends Physics
                     rightTime = 0;
                 }
             }
-            if(Greenfoot.isKeyDown(Options.jumpButtonPlayer1) ||  Greenfoot.isKeyDown(Options.jumpButton2Player1)) // Only jump if on ground
+            if(Greenfoot.isKeyDown(Options.jumpButtonPlayer1)) // Only jump if on ground
             {
                 if (onGround() || onSlope()) {
                     setNewLocation(getDoubleX(), getDoubleY() - 1.0);

@@ -6,12 +6,13 @@ public class Options
     public static String downButtonPlayer1 = "s";
     public static String actionButtonPlayer1 = "e";
     
-    public static String jumpButton2Player1 = "up";
-    public static String rightButton2Player1 = "right";
-    public static String leftButton2Player1 = "left";
-    public static String downButton2Player1 = "down";
+    public static String jumpButtonPlayer2 = "up";
+    public static String rightButtonPlayer2 = "right";
+    public static String leftButtonPlayer2 = "left";
+    public static String downButtonPlayer2 = "down";
+    public static String actionButtonPlayer2 = "space";
     
-    public static int screenHeight = 900;
+    public static int screenHeight = 720;
     public static int screenWidth = screenHeight / 9 * 16;
     public static int blockSize = screenWidth / 30;
     public static int smallerScreen = 0;

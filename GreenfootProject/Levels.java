@@ -139,8 +139,6 @@ public class Levels extends World
                 Add(nextBlock); 
             }
         } 
-        renderHud();
-        renderMenu();
     }
     public void renderHud() {
         HudCoin hudCoin = new HudCoin();
@@ -171,6 +169,27 @@ public class Levels extends World
     private void renderMenu() {
         ActorsOptions menu = new ActorsOptions();
         addObject (menu, 0, 0);
+        
+        Key key1 = new Key("jump", 1);
+        addObject(key1,0,0);
+        Key key2 = new Key("down", 1);
+        addObject(key2,0,0);
+        Key key3 = new Key("left", 1);
+        addObject(key3,0,0);
+        Key key4 = new Key("right", 1);
+        addObject(key4,0,0);
+        Key key5 = new Key("action", 1);
+        addObject(key5,0,0);
+        Key key6 = new Key("jump", 2);
+        addObject(key6,0,0);
+        Key key7 = new Key("down", 2);
+        addObject(key7,0,0);
+        Key key8 = new Key("left", 2);
+        addObject(key8,0,0);
+        Key key9 = new Key("right", 2);
+        addObject(key9,0,0);
+        Key key10 = new Key("action", 2);
+        addObject(key10,0,0);
     }
     public void Add(Actor nextBlock) {
         addObject(nextBlock, width*Options.blockSize + Options.blockSize/2,
@@ -190,6 +209,8 @@ public class Levels extends World
         
         getWorldMap("Level" + level);
         renderWorld();
+        renderHud();
+        renderMenu();
         
         initiateScroll(Globals.backgroundImage, -40, Globals.worldHeight - (Globals.startingHeight * Options.blockSize - Options.blockSize / 4));
         

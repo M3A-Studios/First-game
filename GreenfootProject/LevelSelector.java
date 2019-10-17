@@ -175,12 +175,36 @@ public class LevelSelector extends World
     private void renderMenu() {
         ActorsOptions menu = new ActorsOptions();
         addObject (menu, 0, 0);
+        
+        Key key1 = new Key("jump", 1);
+        addObject(key1,0,0);
+        Key key2 = new Key("down", 1);
+        addObject(key2,0,0);
+        Key key3 = new Key("left", 1);
+        addObject(key3,0,0);
+        Key key4 = new Key("right", 1);
+        addObject(key4,0,0);
+        Key key5 = new Key("action", 1);
+        addObject(key5,0,0);
+        Key key6 = new Key("jump", 2);
+        addObject(key6,0,0);
+        Key key7 = new Key("down", 2);
+        addObject(key7,0,0);
+        Key key8 = new Key("left", 2);
+        addObject(key8,0,0);
+        Key key9 = new Key("right", 2);
+        addObject(key9,0,0);
+        Key key10 = new Key("action", 2);
+        addObject(key10,0,0);
+        
+        Resolution res = new Resolution();
+        addObject(res,0,0);
     }
     public LevelSelector() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
         Globals.selectedLevel = Globals.lastLevel;
         renderWorld();
-        initiateScroll("test.png");
+        initiateScroll("LevelSelect.png");
         
         renderMenu();
         Saver.saveGame();
