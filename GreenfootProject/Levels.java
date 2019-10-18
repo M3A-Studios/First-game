@@ -130,6 +130,8 @@ public class Levels extends World
                     nextBlock = new Coin(world[i] - 1, 10);
                 } else if (world[i] - 1 == 38 || world[i] - 1 == 39 || world[i] - 1 == 40) {
                     nextBlock = new HalfSaw();
+                } else if (world[i] - 1 >= 44 && world[i] - 1 <= 55) {
+                    nextBlock = new Slime(world[i] - 1);
                 } else if (world[i] != 0){
                     nextBlock = new Solid(world[i] - 1); 
                 } else {

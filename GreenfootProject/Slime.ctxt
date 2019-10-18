@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.target=HalfSaw
-comment1.params=
-comment1.target=HalfSaw()
+comment0.target=Slime
+comment1.params=ID
+comment1.target=Slime(int)
 comment2.params=
 comment2.target=void\ act()
 numComments=3

@@ -2,4 +2,6 @@
 comment0.target=Enemy
 comment1.params=
 comment1.target=void\ act()
-numComments=2
+comment2.params=imageLink
+comment2.target=greenfoot.GreenfootImage\ cutImage(java.lang.String)
+numComments=3

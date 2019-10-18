@@ -52,7 +52,8 @@ public class Player extends Physics
         setPlatformClasses(new Class[]{Platform.class});
         setSlopeLeftClasses(new Class[]{SlopeLeft.class});
         setSlopeRightClasses(new Class[]{SlopeRight.class});
-        setDamagingClasses(new Class[]{HalfSaw.class, Spike.class});
+        setDamagingClasses(new Class[]{HalfSaw.class, Slime.class, Spike.class});
+        setJumpOnClasses(new Class[]{Slime.class});
         setSuperDamagingClasses(new Class[]{Lava.class});
     }
     public void act() 
@@ -150,6 +151,19 @@ public class Player extends Physics
                 Globals.scoreThisLevel = Globals.scoreThisLevel + coin.value * 10;
                 if (Globals.scoreThisLevel > 99999) Globals.scoreThisLevel = 99999;
                 getWorld().removeObject(coin);
+            }
+            if (onKillableEnemy()) {
+                jump(20);
+                Globals.scoreThisLevel = Globals.scoreThisLevel + 100;
+                if (Globals.scoreThisLevel > 99999) Globals.scoreThisLevel = 99999;
+                Slime object = (Slime)getOneObjectAtOffset(getImage().getWidth()/2, getImage().getHeight()/2 - 1, Slime.class);
+                if (object != null) {
+                    object.dead = true;
+                }
+                Slime object2 = (Slime)getOneObjectAtOffset(getImage().getWidth()/-2, getImage().getHeight()/2 - 1, Slime.class);
+                if (object2 != null) {
+                    object2.dead = true;
+                }
             }
             if (invulnerabilityFrames > 0) {
                 invulnerabilityFrames -= 1;

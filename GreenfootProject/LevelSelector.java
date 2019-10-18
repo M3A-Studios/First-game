@@ -202,7 +202,7 @@ public class LevelSelector extends World
     }
     public LevelSelector() {
         super(Options.screenWidth, Options.screenHeight, 1, false);
-        Globals.selectedLevel = Globals.lastLevel;
+        //Globals.selectedLevel = Globals.lastLevel;
         renderWorld();
         initiateScroll("LevelSelect.png");
         
@@ -219,7 +219,7 @@ public class LevelSelector extends World
         GreenfootImage bg = new GreenfootImage(backgroundImage); // creates an image to scroll (adjust as needed)
         bg.scale(Options.screenWidth * 2, Options.screenHeight * 5);
         
-        Globals.selectedLevel = Globals.lastLevel;
+        //Globals.selectedLevel = Globals.lastLevel;
         
         scroller = new Scroller(this, bg, Options.screenWidth * 2, Options.screenHeight * 5); 
         scrollActor = new SelectorCharacter("green"); 

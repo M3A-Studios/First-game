@@ -1,6 +1,6 @@
-MaxLevel:29
-LastLevel:0
-SelectedLevel:0
-Coins:64
-Score:10640
+MaxLevel:7
+LastLevel:6
+SelectedLevel:6
+Coins:86
+Score:18760
 
